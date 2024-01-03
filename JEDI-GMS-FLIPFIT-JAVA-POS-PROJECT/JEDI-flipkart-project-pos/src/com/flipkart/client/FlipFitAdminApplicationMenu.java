@@ -350,7 +350,7 @@ public class FlipFitAdminApplicationMenu {
 
         if(option == 8) {
             FlipFitGymOwnerMenu gymApplication = new FlipFitGymOwnerMenu();
-            gymApplication.main(null);
+//            gymApplication.main(null);
         }
     }
 

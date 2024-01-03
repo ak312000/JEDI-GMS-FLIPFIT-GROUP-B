@@ -114,7 +114,7 @@ public class FlipFitApplicationMenu {
             int choice = in.nextInt();
             switch (choice) {
                 case 1:
-                    customer.CustomerRegistration(in);
+//                    customer.CustomerRegistration(in);
                     break;
                 case 2:
                     flipFitCustomerMenu.customerMenu();
@@ -124,6 +124,7 @@ public class FlipFitApplicationMenu {
                     break;
                 default:
                     System.out.println("Incorrect choice");
+                    break;
             }
         }
         else if(role.equalsIgnoreCase("GymOwner")){
@@ -137,8 +138,8 @@ public class FlipFitApplicationMenu {
             String email = in.next();
             switch (choice) {
                 case 1:
-                    gymOwner.registerGymOwner(in, email);
-                    gymOwner.gymOwnerPage(in, email);
+//                    gymOwner.registerGymOwner(in, email);
+//                    gymOwner.gymOwnerPage(in, email);
                     break;
                 case 2:
                     gymOwner.gymOwnerMenu();
@@ -148,6 +149,7 @@ public class FlipFitApplicationMenu {
                     break;
                 default:
                     System.out.println("Incorrect choice");
+                    break;
             }
         }
 

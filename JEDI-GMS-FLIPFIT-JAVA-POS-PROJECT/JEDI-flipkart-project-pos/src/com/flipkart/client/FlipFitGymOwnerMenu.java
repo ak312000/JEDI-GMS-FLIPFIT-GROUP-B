@@ -59,7 +59,7 @@ import com.flipkart.business.FlipFitGymOwnerService;
  */
 public class FlipFitGymOwnerMenu {
 
-    public static void gymOwnerMenu() {
+    public static void gymOwnerMenu() throws Exception {
         // TODO Auto-generated method stub
         FlipFitGymOwnerService gymOwner = new FlipFitGymOwnerService();
         Scanner in = new Scanner(System.in);

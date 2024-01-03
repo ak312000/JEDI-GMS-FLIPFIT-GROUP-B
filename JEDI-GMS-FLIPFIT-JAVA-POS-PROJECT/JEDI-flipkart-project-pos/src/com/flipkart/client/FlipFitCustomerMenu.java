@@ -115,7 +115,11 @@ public class FlipFitCustomerMenu {
 
         else if(option == 6) {
             FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
-            gymApplication.main(null);
+            try {
+                gymApplication.main(null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
