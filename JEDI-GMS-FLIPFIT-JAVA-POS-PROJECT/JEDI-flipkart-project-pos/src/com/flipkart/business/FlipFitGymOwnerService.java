@@ -1,27 +1,44 @@
 package com.flipkart.business;
 
 public class FlipFitGymOwnerService {
-    public void createGymOwner()
-    {
-        System.out.println("GymOwner is created");
+    public String getOwnerDetails(){
+        return "get Owner Details";
     }
 
-    public boolean deleteGymOwner(Integer id)
-    {
-        System.out.println("GymOwner is deleted");
-
+    public boolean viewAllSlots(int id) {
+        System.out.println("view All Slots");
         return true;
     }
 
-    public boolean updateGymOwner(Integer id)
-    {
-        System.out.println("GymOwner is updated");
-
+    public boolean isApprovedGymOwner(int id) {
+        System.out.println("is Approved Gym Owner");
         return true;
     }
 
-    public void listGymOwner()
-    {
-        System.out.println("GymOwner list");
+    public boolean isApprovedGymCenter() {
+        System.out.println("is Approved Gym Center");
+        return true;
+    }
+
+    public void addSlots() {
+        System.out.println("add slots");
+    }
+
+    public boolean addGym(int id) {
+        System.out.println("add gym");
+        return true;
+    }
+
+    public boolean createSlot(int id) {
+        System.out.println("create slot");
+        return true;
+    }
+
+    public void viewAllGymCenters() {
+        System.out.println("view All Gym Centers");
+    }
+
+    public void viewAllApprovedGymCenters() {
+        System.out.println("view All Approved Gym Centers");
     }
 }

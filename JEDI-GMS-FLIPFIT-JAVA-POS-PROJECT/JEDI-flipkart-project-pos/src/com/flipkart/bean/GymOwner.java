@@ -1,43 +1,56 @@
 package com.flipkart.bean;
 
 public class GymOwner {
-    private String name;
-    private String address;
-    private String IDProof;
+    private int ownerId;
+    private String ownerName;
+    private String ownerEmailAddress;
+    private int ownerPhone;
+    private int ownerGSTNum;
+    private boolean isApproved;
+    private String ownerAddress;
 
-    public String getName() {
-        return name;
+    public int getOwnerId() {
+        return ownerId;
     }
-
-    public String getAddress() {
-        return address;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public String getOwnerName() {
+        return ownerName;
     }
-
-    public String getIDProof() {
-        return IDProof;
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
-
-    public void setIDProof(String IDProof) {
-        this.IDProof = IDProof;
+    public String getOwnerEmailAddress() {
+        return ownerEmailAddress;
     }
-
-    public String getGymOwnerID() {
-        return gymOwnerID;
+    public void setOwnerEmailAddress(String ownerEmailAddress) {
+        this.ownerEmailAddress = ownerEmailAddress;
     }
-
-    public void setGymOwnerID(String gymOwnerID) {
-        this.gymOwnerID = gymOwnerID;
+    public int getOwnerPhone() {
+        return ownerPhone;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setOwnerPhone(int ownerPhone) {
+        this.ownerPhone = ownerPhone;
     }
-
-    private String gymOwnerID;
-
-
+    public int getOwnerGSTNum() {
+        return ownerGSTNum;
+    }
+    public void setOwnerGSTNum(int ownerGSTNum) {
+        this.ownerGSTNum = ownerGSTNum;
+    }
+    public boolean isApproved() {
+        return isApproved;
+    }
+    public void setApproved(boolean isApproved) {
+        this.isApproved = isApproved;
+    }
+    public String getOwnerAddress() {
+        return ownerAddress;
+    }
+    public void setOwnerAddress(String ownerAddress) {
+        this.ownerAddress = ownerAddress;
+    }
 }
+
+

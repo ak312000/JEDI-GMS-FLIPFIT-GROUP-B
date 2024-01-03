@@ -1,26 +1,40 @@
 package com.flipkart.bean;
 
 public class Booking {
-    private String customerID;
-    private String gymID;
-    private int slotNumber;
+    private int id;
+    private int gymCentreId;
+    private int slotId;
+    private String custEmail;
+    private String date;
 
-    public String getCustomerID() {
-        return customerID;
+    public int getId() {
+        return id;
     }
-    public void setCustomerID(String customerID) {
-        this.customerID = customerID;
+    public void setId(int id) {
+        this.id = id;
     }
-    public String getGymID() {
-        return gymID;
+    public int getGymCentreId() {
+        return gymCentreId;
     }
-    public void setGymID(String gymID) {
-        this.gymID = gymID;
+    public void setGymCentreId(int gymCentreId) {
+        this.gymCentreId = gymCentreId;
     }
-    public int getSlotNumber() {
-        return slotNumber;
+    public int getSlotId() {
+        return slotId;
     }
-    public void setSlotNumber(int slotNumber) {
-        this.slotNumber = slotNumber;
+    public void setSlotId(int slotId) {
+        this.slotId = slotId;
+    }
+    public String getCustEmail() {
+        return custEmail;
+    }
+    public void setCustEmail(String custEmail) {
+        this.custEmail = custEmail;
+    }
+    public String getDate() {
+        return date;
+    }
+    public void setDate(String date) {
+        this.date = date;
     }
 }
