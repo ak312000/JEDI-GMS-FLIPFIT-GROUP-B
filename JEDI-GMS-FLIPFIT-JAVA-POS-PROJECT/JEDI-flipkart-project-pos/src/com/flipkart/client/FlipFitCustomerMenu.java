@@ -19,6 +19,7 @@ public class FlipFitCustomerMenu {
             System.out.println("Enter the choice you want to perform:");
             Scanner in = new Scanner(System.in);
             int choice = in.nextInt();
+            in.nextLine();
             switch (choice) {
                 case 1:
                     System.out.println("This is your profile");

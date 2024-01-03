@@ -61,6 +61,7 @@ public class FlipFitApplicationMenu {
                     System.out.println("\t\t2.) Gym Owner");
                     System.out.println("\t\t3.)  Admin");
                     int NewRole = in.nextInt();
+                    in.nextLine();
                     System.out.println("\tEnter your Email: ");
                     String Email = in.nextLine();
                     System.out.print("\tEnter your Location: ");
