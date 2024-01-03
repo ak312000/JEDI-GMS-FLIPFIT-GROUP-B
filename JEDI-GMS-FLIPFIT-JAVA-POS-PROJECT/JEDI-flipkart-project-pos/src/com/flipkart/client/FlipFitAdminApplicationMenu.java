@@ -12,9 +12,13 @@ public class FlipFitAdminApplicationMenu {
         while (opt) {
             System.out.println("Welcome to the Admin Menu");
 
-            System.out.println("\t\t\t1.) Manage Customers");
-            System.out.println("\t\t\t2.) Manage GymCentre");
-            System.out.println("\t\t\t3.) Exit");
+            System.out.println("\t\t\t1.) View Customers");
+            System.out.println("\t\t\t2.) Approve Customers");
+            System.out.println("\t\t\t3.) Register Details");
+
+
+            System.out.println("\t\t\t4.) Manage GymCentre");
+            System.out.println("\t\t\t5.) Exit");
             System.out.println("Enter the choice you want to perform:");
 
 
@@ -25,7 +29,13 @@ public class FlipFitAdminApplicationMenu {
                     System.out.println("You are in customer management");
                     break;
                 case 2:
-                    System.out.println("You are in gym centre management");
+                    System.out.println("You are now approved in gym centre management");
+                    break;
+                case 3:
+                    System.out.println("Register Details");
+                    break;
+                case 4:
+                    System.out.println("gym center managing functions being called here");
                     break;
                 default:
                     opt = false;

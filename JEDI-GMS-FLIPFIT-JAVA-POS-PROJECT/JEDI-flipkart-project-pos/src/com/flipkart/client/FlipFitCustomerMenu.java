@@ -13,9 +13,11 @@ public class FlipFitCustomerMenu {
         while (opt) {
             System.out.println("Welcome to the Customer Menu");
             System.out.println("\t\t\t1.) View Profile");
-            System.out.println("\t\t\t2.) Book a slot");
-            System.out.println("\t\t\t3.) cancel a slot");
-            System.out.println("\t\t\t4.) Exit");
+            System.out.println("\t\t\t2.) View Gyms");
+
+            System.out.println("\t\t\t3.) Book a slot");
+            System.out.println("\t\t\t4.) cancel a slot");
+            System.out.println("\t\t\t5.) Exit");
             System.out.println("Enter the choice you want to perform:");
             Scanner in = new Scanner(System.in);
             int choice = in.nextInt();
@@ -25,9 +27,12 @@ public class FlipFitCustomerMenu {
                     System.out.println("This is your profile");
                     break;
                 case 2:
-                    System.out.println("Directing to book a slot");
+                    System.out.println("View Gyms");
                     break;
                 case 3:
+                    System.out.println("Book Slots");
+                    break;
+                case 4:
                     System.out.println("Cancel a slot");
                     break;
                 default:
