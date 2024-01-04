@@ -9,8 +9,8 @@ public class FlipFitCustomerService {
     FlipFitCustomerDao customerDatabase = new FlipFitCustomerDao();
     Customer customer = new Customer();
 
-    public void createCustomer(int id, String name, String emailAddress, int phone, String password) {
-
+    public void createCustomer(int id, String name, String address,String emailAddress, int phone, String password) {
+        customer.setCustomerAddress(address);
         customer.setCustomerEmailAddress(emailAddress);
         customer.setCustomerName(name);
         customer.setCustomerId(id);
@@ -18,7 +18,7 @@ public class FlipFitCustomerService {
         customer.setPassword(password);
         customerDatabase.add(customer);
 
-        System.out.println("customer details added");
+        System.out.println("customer added Successfully");
     }
 
     public void bookSlot(String gym) {
@@ -89,4 +89,13 @@ public class FlipFitCustomerService {
     }
 
 
+    public boolean isValidCustomerCredentials( String customerEmail, String customerPassword) {
+        List<Customer> allCustomers = customerDatabase.getAllCustomers();
+        for (Customer customer : allCustomers) {
+            if (customer.getCustomerEmailAddress().equals(customerEmail) && customer.getPassword().equals(customerPassword)) {
+                return true; // Credentials are valid
+            }
+        }
+        return false; // No matching customer found
+    }
 }

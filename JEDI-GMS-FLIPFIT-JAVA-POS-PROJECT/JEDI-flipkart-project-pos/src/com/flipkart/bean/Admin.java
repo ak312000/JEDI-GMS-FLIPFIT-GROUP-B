@@ -4,14 +4,14 @@ public class Admin {
     private int adminId;
     private String adminName;
     private String adminEmailAddress;
-    private int phone;
+    private String phone;
     private String password;
 
-    public int getAdminPhone() {
+    public String getAdminPhone() {
         return phone;
     }
 
-    public void setAdminPhone(int phone) {
+    public void setAdminPhone(String phone) {
         this.phone = phone;
     }
 

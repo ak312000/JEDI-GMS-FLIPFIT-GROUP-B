@@ -58,8 +58,62 @@ import com.flipkart.business.FlipFitGymOwnerService;
  *
  */
 public class FlipFitGymOwnerMenu {
+    FlipFitGymOwnerService flipFitGymOwnerService = new FlipFitGymOwnerService();
+    public void login(){
+        Scanner in = new Scanner(System.in);
 
-    public static void gymOwnerMenu() throws Exception {
+        // Get admin email and password from the user
+        System.out.print("Enter Admin Email Address: ");
+        String adminEmail = in.nextLine();
+
+        System.out.print("Enter Admin Password: ");
+        String adminPassword = in.nextLine();
+
+        if (flipFitGymOwnerService.isValidGymOwnerCredentials(adminEmail, adminPassword)) {
+            System.out.println("Login successful!");
+            gymOwnerMenu();
+        } else {
+            System.out.println("Invalid credentials. Login failed.");
+        }
+
+
+    }
+    public void register(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Owner ID: ");
+        int ownerId = scanner.nextInt();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Owner Name: ");
+        String ownerName = scanner.nextLine();
+
+        System.out.print("Enter Owner Email Address: ");
+        String ownerEmailAddress = scanner.nextLine();
+
+        System.out.print("Enter Owner Phone: ");
+        int ownerPhone = scanner.nextInt();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Owner GST Number: ");
+        int ownerGSTNum = scanner.nextInt();
+
+        System.out.print("Is Owner Approved? (true/false): ");
+        boolean isApproved = scanner.nextBoolean();
+
+        scanner.nextLine(); // Consume the newline character left by nextBoolean()
+
+        System.out.print("Enter Owner Address: ");
+        String ownerAddress = scanner.nextLine();
+        System.out.print("Enter Gym Owner Password: ");
+        String password = scanner.nextLine();
+        flipFitGymOwnerService.createGymOwner(ownerId,ownerName,ownerEmailAddress,ownerPhone,ownerGSTNum,isApproved,ownerAddress,password);
+gymOwnerMenu();
+    }
+
+    public static void gymOwnerMenu() {
         // TODO Auto-generated method stub
         FlipFitGymOwnerService gymOwner = new FlipFitGymOwnerService();
         Scanner in = new Scanner(System.in);
@@ -79,18 +133,5 @@ public class FlipFitGymOwnerMenu {
             FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
             gymApplication.main(null);
         }
-
-		/*
-		System.out.println(gymOwner.viewAllSlots(0));
-		System.out.println(gymOwner.isApprovedGymOwner(0));
-		System.out.println(gymOwner.isApprovedGymCenter());
-		System.out.println(gymOwner.createSlot(0));
-
-		gymOwner.addSlots();
-		gymOwner.getOwnerDetails();
-		gymOwner.addGym(0);
-		gymOwner.viewAllApprovedGymCenters();
-		gymOwner.viewAllGymCenters();
-		*/
     }
 }

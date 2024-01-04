@@ -144,13 +144,13 @@ import com.flipkart.bean.Admin;
 import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.FlipFitAdminService;
+import com.flipkart.dao.FlipFitAdminDao;
 
 /**
  *
  */
 public class FlipFitAdminApplicationMenu {
     FlipFitAdminService flipFitAdminService = new FlipFitAdminService();
-
 
 //    public void approveGymCentre(Scanner in) {
 //        // TODO Auto-generated method stub
@@ -264,9 +264,55 @@ public class FlipFitAdminApplicationMenu {
         System.out.println("--------------------------------------------------------------------");
         System.out.println();
     }
+    public void Login() {
+        Scanner in = new Scanner(System.in);
 
-    public void AdminPage(Scanner in) throws Exception {
+        // Get admin email and password from the user
+        System.out.print("Enter Admin Email Address: ");
+        String adminEmail = in.nextLine();
+
+        System.out.print("Enter Admin Password: ");
+        String adminPassword = in.nextLine();
+
+        if (flipFitAdminService.isValidAdminCredentials(adminEmail, adminPassword)) {
+            System.out.println("Login successful!");
+            AdminPage();
+        } else {
+            System.out.println("Invalid credentials. Login failed.");
+        }
+    }
+
+
+
+    public void register() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Admin ID: ");
+        int adminId = scanner.nextInt();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Admin Name: ");
+        String adminName = scanner.nextLine();
+
+        System.out.print("Enter Admin Email Address: ");
+        String adminEmailAddress = scanner.nextLine();
+
+        System.out.print("Enter Admin Phone: ");
+        String phone = scanner.nextLine();
+
+
+
+        System.out.print("Enter Admin Password: ");
+        String password = scanner.nextLine();
+        flipFitAdminService.createAdmin(adminId,adminName,adminEmailAddress,phone,password);
+        AdminPage();
+    }
+
+
+    public void AdminPage() {
         while(true) {
+            Scanner in = new Scanner(System.in);
             System.out.println("1. View All Gym Owners");
             System.out.println("2. View All Pending Gym Owners");
             System.out.println("3. View All Gym Centres");
@@ -341,7 +387,7 @@ public class FlipFitAdminApplicationMenu {
             }
 
             if(subOption == 3) {
-                int phone = in.nextInt();
+                String phone = in.nextLine();
                 admin.setAdminPhone(phone);
                 System.out.println("Contact number changed successfully");
             }

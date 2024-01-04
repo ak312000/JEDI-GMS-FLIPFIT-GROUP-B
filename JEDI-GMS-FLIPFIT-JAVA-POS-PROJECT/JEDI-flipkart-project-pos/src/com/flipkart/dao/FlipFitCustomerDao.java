@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipFitCustomerDao {
-    List<Customer> customers = new ArrayList<>();
+    static List<Customer> customers = new ArrayList<>();
 
     public void add(Customer customer) {
         customers.add(customer);
         System.out.println("Customer data successfully added");
+    }
+
+    public List<Customer> getAllCustomers() {
+
+        return customers;
     }
 }

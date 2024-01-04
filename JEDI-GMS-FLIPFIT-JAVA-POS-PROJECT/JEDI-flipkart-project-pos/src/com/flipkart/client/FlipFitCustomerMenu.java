@@ -55,6 +55,7 @@
 
 package com.flipkart.client;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Customer;
@@ -64,6 +65,50 @@ import com.flipkart.business.FlipFitCustomerService;
  *
  */
 public class FlipFitCustomerMenu {
+    FlipFitCustomerService flipFitCustomerService = new FlipFitCustomerService();
+    public void login(){
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter Customer Email Address: ");
+        String customerEmail = in.nextLine();
+
+        System.out.print("Enter Customer Password: ");
+        String customerPassword = in.nextLine();
+        if (flipFitCustomerService.isValidCustomerCredentials(customerEmail, customerPassword)) {
+            System.out.println("Login successful!");
+            customerMenu();
+        } else {
+            System.out.println("Invalid credentials. Login failed.");
+        }
+    }
+    public void register(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Customer ID: ");
+        int customerId = scanner.nextInt();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Customer Name: ");
+        String customerName = scanner.nextLine();
+
+        System.out.print("Enter Customer Address: ");
+        String customerAddress = scanner.nextLine();
+
+        System.out.print("Enter Customer Email Address: ");
+        String customerEmailAddress = scanner.nextLine();
+
+        System.out.print("Enter Customer Phone: ");
+        int customerPhone = scanner.nextInt();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Customer Password: ");
+        String password = scanner.nextLine();
+
+        flipFitCustomerService.createCustomer(customerId,customerName,customerAddress,customerEmailAddress,customerPhone,password);
+        customerMenu();
+    }
 
 
     public static void customerMenu() {
