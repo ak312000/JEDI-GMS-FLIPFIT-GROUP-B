@@ -31,4 +31,11 @@ public class FlipFitGymOwnerDao {
         return PendingGymOwners;
     }
 
+    public void approve(int gymOwnerId) {
+        for(GymOwner gymOwner:gymOwnerList){
+            if(gymOwner.getOwnerId()==gymOwnerId){
+                gymOwner.setApproved(true);
+            }
+        }
+    }
 }

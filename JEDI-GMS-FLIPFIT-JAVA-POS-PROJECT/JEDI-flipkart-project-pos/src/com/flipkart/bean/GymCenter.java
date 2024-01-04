@@ -8,6 +8,15 @@ public class GymCenter {
     private String gymLocation;
     private int numOfSeats;
 
+    public GymCenter(int id, String gymName, String gymEmailAddress, boolean isApproved, String gymLocation, int numOfSeats) {
+        this.id = id;
+        this.gymName = gymName;
+        this.gymEmailAddress = gymEmailAddress;
+        this.isApproved = isApproved;
+        this.gymLocation = gymLocation;
+        this.numOfSeats = numOfSeats;
+    }
+
     public int getId() {
         return id;
     }

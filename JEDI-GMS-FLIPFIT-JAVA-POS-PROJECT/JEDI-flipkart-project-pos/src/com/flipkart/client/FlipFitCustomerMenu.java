@@ -80,6 +80,7 @@ public class FlipFitCustomerMenu {
         } else {
             System.out.println("Invalid credentials. Login failed.");
         }
+        customerMenu();
     }
     public void register(){
         Scanner scanner = new Scanner(System.in);
@@ -117,48 +118,66 @@ public class FlipFitCustomerMenu {
         Customer customer = new Customer();
         Scanner in = new Scanner(System.in);
         int option;
-        System.out.println(customerService.getCustomerDetails());
 
-        System.out.println("1. Search Gym");
-        System.out.println("2. View Booked slots");
-        System.out.println("3. Cancel Booking");
-        System.out.println("4. Make Payment");
-        System.out.println("5. Edit Profile");
-        System.out.println("6. Exit");
+        System.out.println("1. Search all Gyms");
+        System.out.println("2. Search Gyms by location");
+
+        System.out.println("3. View Booked slots");
+        System.out.println("4. Cancel Booking");
+        System.out.println("5. Make Payment");
+        System.out.println("6. Edit Profile");
+        System.out.println("7. View Profile");
+        System.out.println("8. Exit");
 
         option = in.nextInt();
 
+
         if(option == 1) {
-            customerService.searchGym("Location1");
+            customerService.searchAllGyms();
+        }
+        else if(option==2)
+        {
+            System.out.print("Enter the Location where you want to search");
+            String location=in.next();
+            customerService.searchGymOnLocation(location);
         }
         else if(option == 5) {
-            System.out.println("1. Edit name");
-            System.out.println("2. Edit email address");
-            System.out.println("3. Edit phone");
+            System.out.println("Enter the customer Id you want to update");
+            Integer customerId=in.nextInt();
 
-            int subOption = in.nextInt();
+            System.out.print("Enter new name: ");
+            String newName = in.nextLine();
+            customer.setCustomerName(newName);
 
-            if(subOption == 1) {
-                String name = in.next();
-                customer.setCustomerName(name);
-                System.out.println("Name changed successfully");
-            }
+            System.out.print("Enter new address: ");
+            String newAddress = in.nextLine();
+            customer.setCustomerAddress(newAddress);
 
-            if(subOption == 2) {
-                String email = in.next();
-                customer.setCustomerEmailAddress(email);
-                System.out.println("Email changed successfully");
-            }
+            System.out.print("Enter new email address: ");
+            String newEmail = in.nextLine();
+            customer.setCustomerEmailAddress(newEmail);
 
-            if(subOption == 3) {
-                int phone = in.nextInt();
-                customer.setCustomerPhone(phone);
-                System.out.println("Contact number changed successfully");
-            }
+            System.out.print("Enter new phone number: ");
+            int newPhone = in.nextInt();
+            customer.setCustomerPhone(newPhone);
 
+            // Additional attributes can be added based on your Customer class
+
+            in.nextLine(); // Consume the newline character left by nextInt()
+
+            System.out.print("Enter new password: ");
+            String newPassword = in.nextLine();
+
+           customerService.editCustomer(customerId,newName,newAddress,newEmail,newPhone);
         }
-
-        else if(option == 6) {
+else if (option==6)
+        {
+            System.out.println("enter the Customer Id you want to view");
+            Integer customerId=in.nextInt();
+            in.nextLine();
+            customerService.viewCustomerProfile(customerId);
+        }
+        else if(option == 7) {
             FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
             try {
                 gymApplication.main(null);
@@ -166,5 +185,6 @@ public class FlipFitCustomerMenu {
                 throw new RuntimeException(e);
             }
         }
+        customerMenu();
     }
 }

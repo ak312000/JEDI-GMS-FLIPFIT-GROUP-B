@@ -137,23 +137,19 @@ public class FlipFitAdminService {
         System.out.println("--------------------------------------------------------");
     }
 
-
-
-
-
-    public boolean approveGymOwnerRegistration(int id) {
-        System.out.println("approve Gym Owner Registration");
-        return true;
+    public void approveGymOwner() {
+        // TODO Auto-generated method stub
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the GymOwner id: ");
+        Integer id = in.nextInt();
+        gymOwnerDao.approve(id);
     }
 
-    public List<GymOwner> viewAllApprovedGymOwners() {
-
-        adminDatabase.getAllAdmins();
-        return Arrays.asList();
-    }
-
-    public List<GymCenter> viewAllApprovedGyms() {
-        System.out.println("view All Approved Gyms");
-        return Arrays.asList();
+    public void approveGymCentre() {
+        // TODO Auto-generated method stub
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the GymCentre id: ");
+        Integer id = in.nextInt();
+        gymCentreDao.approve(id);
     }
 }
