@@ -8,81 +8,81 @@ import java.util.Scanner;
 
 public class FlipFitApplicationMenu {
     public static void mainPage()  {
-        System.out.println("Welcome to FlipFit Application");
+        boolean flag = true;
+        while (flag) {
+            System.out.println("Welcome to FlipFit Application");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the username: ");
-        String username = in.next();
-        System.out.println("Enter the password: ");
-        String password = in.next();
-        System.out.println("Enter the role: ");
-        String role = in.next();
-
-        if(role.equalsIgnoreCase("Admin")){
-            System.out.println("Welcome to Admin Menu");
-            FlipFitAdminApplicationMenu admin=new FlipFitAdminApplicationMenu();
-            int choice = index();
-            switch (choice) {
-                case 1:
-                    admin.Login();
-                    break;
-                case 2:
-                    admin.register();
-                    break;
-                case 3:
-                    FlipFitApplicationMenu.mainPage();
-                    break;
-                default:
-                    System.out.println("Incorrect choice");
-                    break;
-            }
-        }
-        else if(role.equalsIgnoreCase("Customer")){
-            System.out.println("Welcome to Customer Menu");
-            FlipFitCustomerMenu customer =new FlipFitCustomerMenu();
-
-            int choice =  index();;
-            switch (choice) {
-                case 1:
-
-                    customer.login();
-                    break;
-                case 2:
-                    customer.register();
-                    break;
-                case 3:
-                    FlipFitApplicationMenu.mainPage();
-                    break;
-                default:
-                    System.out.println("Incorrect choice");
-                    break;
-            }
-        }
-        else if(role.equalsIgnoreCase("GymOwner")){
-            FlipFitGymOwnerMenu gymOwner=new FlipFitGymOwnerMenu();
-            int choice= index();
-
-            System.out.println("Enter your email: ");
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter the EmailId: ");
             String email = in.next();
-            switch (choice) {
-                case 1:
-                    gymOwner.login();
-//                    gymOwner.(in, email);
-//                    gymOwner.gymOwnerPage(in, email);
-                    break;
-                case 2:
-                    gymOwner.register();
-                    break;
-                case 3:
-                    mainPage();
-                    break;
-                default:
-                    System.out.println("Incorrect choice");
-                    break;
+            System.out.println("Enter the Password: ");
+            String password = in.next();
+            System.out.println("Enter the role: ");
+            System.out.println("\tPress 1 For Admin");
+            System.out.println("\tPress 2 For Customer");
+            System.out.println("\tPress 3 For gymowner");
+            System.out.println("\tPress any other key For Exit");
+
+            int role = in.nextInt();
+
+            if (role==1) {
+                System.out.println("Welcome to Admin Menu");
+                FlipFitAdminApplicationMenu admin = new FlipFitAdminApplicationMenu();
+                int choice = index();
+                switch (choice) {
+                    case 1:
+                        admin.Login(email, password);
+                        break;
+                    case 2:
+                        admin.register(email, password);
+                        break;
+                    case 3:
+                        FlipFitApplicationMenu.mainPage();
+                        break;
+                    default:
+                        System.out.println("Incorrect choice");
+                        break;
+                }
+            } else if (role==2) {
+                System.out.println("Welcome to Customer Menu");
+                FlipFitCustomerMenu customer = new FlipFitCustomerMenu();
+
+                int choice = index();
+                switch (choice) {
+                    case 1:
+                        customer.login(email,password);
+                        break;
+                    case 2:
+                        customer.register(email,password);
+                        break;
+                    case 3:
+                        FlipFitApplicationMenu.mainPage();
+                        break;
+                    default:
+                        System.out.println("Incorrect choice");
+                        break;
+                }
+            } else if (role==3) {
+                FlipFitGymOwnerMenu gymOwner = new FlipFitGymOwnerMenu();
+                int choice = index();
+                switch (choice) {
+                    case 1:
+                        gymOwner.login(email,password);
+                        break;
+                    case 2:
+                        gymOwner.register(email,password);
+                        break;
+                    case 3:
+                        mainPage();
+                        break;
+                    default:
+                        System.out.println("Incorrect choice");
+                        break;
+                }
+            } else {
+                System.out.println("Please Enter valid role");
+                flag=false;
             }
-        }
-        else {
-            System.out.println("Please Enter valid role");
         }
     }
 

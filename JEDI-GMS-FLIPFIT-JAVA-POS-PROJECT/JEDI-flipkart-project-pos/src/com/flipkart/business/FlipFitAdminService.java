@@ -16,31 +16,21 @@ public class FlipFitAdminService {
     FlipFitGymOwnerDao gymOwnerDao = new FlipFitGymOwnerDao();
     FlipFitGymCentreDao gymCentreDao = new FlipFitGymCentreDao();
 
-    public void createAdmin(int id, String name, String emailAddress, String phone, String password) {
-        Admin admin = new Admin();
-
-        admin.setAdminEmailAddress(emailAddress);
-        admin.setAdminName(name);
-        admin.setAdminId(id);
-        admin.setAdminPhone(phone);
-        admin.setPassword(password);
+    public void createAdmin( String name, String emailAddress, String phone, String password) {
+        Admin admin = new Admin(name,emailAddress,phone,password);
         adminDatabase.add(admin);
 
-//        System.out.println("admin details added");
     }
     public boolean isValidAdminCredentials( String email, String password) {
         List<Admin> allAdmins = adminDatabase.getAllAdmins();
-        // Check if the entered credentials match any of the admins in the list
-        System.out.println("reached here");
+
 
         for (Admin admin : allAdmins) {
-            System.out.println("email"+admin.getAdminEmailAddress());
-            System.out.println("pass"+admin.getPassword());
             if (admin.getAdminEmailAddress().equals(email) && admin.getPassword().equals(password)) {
-                return true; // Credentials are valid
+                return true;
             }
         }
-        return false; // No matching admin found
+        return false;
     }
 
     public void viewAllGymOwners() {

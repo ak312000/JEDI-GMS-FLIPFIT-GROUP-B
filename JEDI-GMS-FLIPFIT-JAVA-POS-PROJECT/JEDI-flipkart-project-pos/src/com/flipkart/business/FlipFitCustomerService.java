@@ -10,22 +10,36 @@ import java.util.*;
 public class FlipFitCustomerService {
     FlipFitCustomerDao customerDatabase = new FlipFitCustomerDao();
     FlipFitGymCentreDao flipFitGymCentreDao=new FlipFitGymCentreDao();
-    Customer customer = new Customer();
 
-    public void createCustomer(int id, String name, String address,String emailAddress, int phone, String password) {
-        customer.setCustomerAddress(address);
-        customer.setCustomerEmailAddress(emailAddress);
-        customer.setCustomerName(name);
-        customer.setCustomerId(id);
-        customer.setCustomerPhone(phone);
-        customer.setPassword(password);
+    public void createCustomer(String name, String address,String emailAddress, String phone, String password) {
+        Customer customer = new Customer(name,address,emailAddress,phone,password);
         customerDatabase.add(customer);
-
         System.out.println("customer added Successfully");
     }
-    public void editCustomer(Integer customerId,String newName,String newAddress,String newEmail,Integer newPhone )
+    public void editCustomer( )
     {
-        Customer customer = FlipFitCustomerDao.getCustomerById(customerId);
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter the customer Id you want to update");
+        Integer customerId=in.nextInt();
+
+        System.out.print("Enter new name: ");
+        String newName = in.nextLine();
+
+        System.out.print("Enter new address: ");
+        String newAddress = in.nextLine();
+
+        System.out.print("Enter new email address: ");
+        String newEmail = in.nextLine();
+        System.out.print("Enter new phone number: ");
+        String newPhone = in.nextLine();
+
+        in.nextLine();
+
+        System.out.print("Enter new password: ");
+        String newPassword = in.nextLine();
+
+
+        Customer customer = customerDatabase.getCustomerById(customerId);
 
         if (customer != null) {
             // Update customer attributes
@@ -88,8 +102,8 @@ public class FlipFitCustomerService {
         bookSlot(selectedGym);
     }
 
-    public void viewCustomerProfile(int customerId){
-        Customer customer = customerDatabase.getCustomerById(customerId);
+    public void viewCustomerProfile(String email){
+        Customer customer = customerDatabase.getCustomerByemail(email);
 
         if (customer != null) {
             // Display customer details
@@ -101,7 +115,7 @@ public class FlipFitCustomerService {
 
             // Additional attributes can be added based on your Customer class
         } else {
-            System.out.println("Customer not found with ID: " + customerId);
+            System.out.println("Customer not found with ID: " + email);
         }
     }
 

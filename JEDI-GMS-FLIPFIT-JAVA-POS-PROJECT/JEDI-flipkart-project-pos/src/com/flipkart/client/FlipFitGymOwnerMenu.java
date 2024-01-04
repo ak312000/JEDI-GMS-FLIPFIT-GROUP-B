@@ -58,70 +58,32 @@ import com.flipkart.business.FlipFitGymOwnerService;
  *
  */
 public class FlipFitGymOwnerMenu {
+    FlipFitGymOwnerService gymOwner = new FlipFitGymOwnerService();
     FlipFitGymOwnerService flipFitGymOwnerService = new FlipFitGymOwnerService();
-    public void login(){
+    public void login(String email,String password){
         Scanner in = new Scanner(System.in);
-
-        // Get admin email and password from the user
-        System.out.print("Enter Admin Email Address: ");
-        String adminEmail = in.nextLine();
-
-        System.out.print("Enter Admin Password: ");
-        String adminPassword = in.nextLine();
-
-        if (flipFitGymOwnerService.isValidGymOwnerCredentials(adminEmail, adminPassword)) {
+        if (flipFitGymOwnerService.isValidGymOwnerCredentials(email, password)) {
             System.out.println("Login successful!");
             gymOwnerMenu();
         } else {
-            System.out.println("Invalid credentials. Login failed.");
+            System.out.println("Invalid credentials. Login failed. Please Try again.....");
         }
 
 
     }
-    public void register(){
-        Scanner scanner = new Scanner(System.in);
+    public void register(String email,String password){
 
-        System.out.print("Enter Owner ID: ");
-        int ownerId = scanner.nextInt();
-
-        scanner.nextLine(); // Consume the newline character left by nextInt()
-
-        System.out.print("Enter Owner Name: ");
-        String ownerName = scanner.nextLine();
-
-        System.out.print("Enter Owner Email Address: ");
-        String ownerEmailAddress = scanner.nextLine();
-
-        System.out.print("Enter Owner Phone: ");
-        int ownerPhone = scanner.nextInt();
-
-        scanner.nextLine(); // Consume the newline character left by nextInt()
-
-        System.out.print("Enter Owner GST Number: ");
-        int ownerGSTNum = scanner.nextInt();
-
-        System.out.print("Is Owner Approved? (true/false): ");
-        boolean isApproved = scanner.nextBoolean();
-
-        scanner.nextLine(); // Consume the newline character left by nextBoolean()
-
-        System.out.print("Enter Owner Address: ");
-        String ownerAddress = scanner.nextLine();
-        System.out.print("Enter Gym Owner Password: ");
-        String password = scanner.nextLine();
-        flipFitGymOwnerService.createGymOwner(ownerId,ownerName,ownerEmailAddress,ownerPhone,ownerGSTNum,isApproved,ownerAddress,password);
-gymOwnerMenu();
+        flipFitGymOwnerService.createGymOwner(email,password);
+        gymOwnerMenu();
     }
 
-    public static void gymOwnerMenu() {
-        // TODO Auto-generated method stub
-        FlipFitGymOwnerService gymOwner = new FlipFitGymOwnerService();
-
-        int op1;
+    public void gymOwnerMenu() {
 
 
-        boolean flag=true;
-        while(flag) {
+
+
+        while(true) {
+            Scanner in = new Scanner(System.in);
             System.out.println("1. Gym Registration");
             System.out.println("2. Add new slots");
             System.out.println("3. View Registered Gyms");
@@ -130,9 +92,7 @@ gymOwnerMenu();
             System.out.println("6. Edit slots");
             System.out.println("7. Edit Profile");
             System.out.println("8. Exit");
-
-            Scanner in = new Scanner(System.in);
-            op1 = in.nextInt();
+            int op1 = in.nextInt();
             switch (op1) {
                 case 1:
                     gymOwner.registerGymCenter();
@@ -156,9 +116,10 @@ gymOwnerMenu();
                     gymOwner.editProfile();
                     break;
                 default:
-                    flag=false;
                     System.out.println("Exit");
+                    FlipFitApplicationMenu.mainPage();
                     break;
             }
+
         }
 }}

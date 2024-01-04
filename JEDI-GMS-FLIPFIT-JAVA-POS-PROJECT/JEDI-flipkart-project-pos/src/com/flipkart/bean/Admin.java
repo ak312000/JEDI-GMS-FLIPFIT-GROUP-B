@@ -1,11 +1,24 @@
 package com.flipkart.bean;
 
 public class Admin {
+    private static int startId=100;
     private int adminId;
     private String adminName;
     private String adminEmailAddress;
     private String phone;
     private String password;
+
+    public Admin(int adminId) {
+
+    }
+
+    public Admin(String name, String emailAddress, String phone, String password) {
+        this.adminId = startId++;
+        this.adminName=name;
+        this.adminEmailAddress=emailAddress;
+        this.phone=phone;
+        this.password=password;
+    }
 
     public String getAdminPhone() {
         return phone;

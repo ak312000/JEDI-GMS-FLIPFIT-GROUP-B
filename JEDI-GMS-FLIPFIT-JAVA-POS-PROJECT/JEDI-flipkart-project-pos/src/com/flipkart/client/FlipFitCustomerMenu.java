@@ -65,30 +65,18 @@ import com.flipkart.business.FlipFitCustomerService;
  *
  */
 public class FlipFitCustomerMenu {
-    FlipFitCustomerService flipFitCustomerService = new FlipFitCustomerService();
-    public void login(){
-        Scanner in = new Scanner(System.in);
-
-        System.out.print("Enter Customer Email Address: ");
-        String customerEmail = in.nextLine();
-
-        System.out.print("Enter Customer Password: ");
-        String customerPassword = in.nextLine();
-        if (flipFitCustomerService.isValidCustomerCredentials(customerEmail, customerPassword)) {
+    FlipFitCustomerService customerService = new FlipFitCustomerService();
+    public void login(String email,String password){
+        if (customerService.isValidCustomerCredentials(email, password)) {
             System.out.println("Login successful!");
             customerMenu();
         } else {
-            System.out.println("Invalid credentials. Login failed.");
+            System.out.println("Invalid credentials. Login failed. Please Try again.....");
         }
         customerMenu();
     }
-    public void register(){
+    public void register(String email, String password){
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter Customer ID: ");
-        int customerId = scanner.nextInt();
-
-        scanner.nextLine(); // Consume the newline character left by nextInt()
 
         System.out.print("Enter Customer Name: ");
         String customerName = scanner.nextLine();
@@ -96,32 +84,23 @@ public class FlipFitCustomerMenu {
         System.out.print("Enter Customer Address: ");
         String customerAddress = scanner.nextLine();
 
-        System.out.print("Enter Customer Email Address: ");
-        String customerEmailAddress = scanner.nextLine();
-
         System.out.print("Enter Customer Phone: ");
-        int customerPhone = scanner.nextInt();
+        String customerPhone = scanner.nextLine();
 
-        scanner.nextLine(); // Consume the newline character left by nextInt()
-
-        System.out.print("Enter Customer Password: ");
-        String password = scanner.nextLine();
-
-        flipFitCustomerService.createCustomer(customerId,customerName,customerAddress,customerEmailAddress,customerPhone,password);
+        scanner.nextLine();
+        customerService.createCustomer(customerName,customerAddress,email,customerPhone,password);
         customerMenu();
     }
 
 
-    public static void customerMenu() {
+    public void customerMenu() {
 
-        FlipFitCustomerService customerService = new FlipFitCustomerService();
-        Customer customer = new Customer();
+
         Scanner in = new Scanner(System.in);
         int option;
 
         System.out.println("1. Search all Gyms");
         System.out.println("2. Search Gyms by location");
-
         System.out.println("3. View Booked slots");
         System.out.println("4. Cancel Booking");
         System.out.println("5. Make Payment");
@@ -131,60 +110,38 @@ public class FlipFitCustomerMenu {
 
         option = in.nextInt();
 
-
-        if(option == 1) {
-            customerService.searchAllGyms();
+        switch (option){
+            case 1:
+                customerService.searchAllGyms();
+                break;
+            case 2:
+                System.out.print("Enter the Location where you want to search");
+                String location=in.next();
+                customerService.searchGymOnLocation(location);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                customerService.editCustomer();
+                break;
+            case 7:
+                System.out.println("enter the Customer Id you want to view");
+                String email=in.nextLine();
+                customerService.viewCustomerProfile(email);
+            case 8:
+                FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
+                try {
+                    gymApplication.main(null);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            default:
+                customerMenu();
         }
-        else if(option==2)
-        {
-            System.out.print("Enter the Location where you want to search");
-            String location=in.next();
-            customerService.searchGymOnLocation(location);
-        }
-        else if(option == 5) {
-            System.out.println("Enter the customer Id you want to update");
-            Integer customerId=in.nextInt();
-
-            System.out.print("Enter new name: ");
-            String newName = in.nextLine();
-            customer.setCustomerName(newName);
-
-            System.out.print("Enter new address: ");
-            String newAddress = in.nextLine();
-            customer.setCustomerAddress(newAddress);
-
-            System.out.print("Enter new email address: ");
-            String newEmail = in.nextLine();
-            customer.setCustomerEmailAddress(newEmail);
-
-            System.out.print("Enter new phone number: ");
-            int newPhone = in.nextInt();
-            customer.setCustomerPhone(newPhone);
-
-            // Additional attributes can be added based on your Customer class
-
-            in.nextLine(); // Consume the newline character left by nextInt()
-
-            System.out.print("Enter new password: ");
-            String newPassword = in.nextLine();
-
-           customerService.editCustomer(customerId,newName,newAddress,newEmail,newPhone);
-        }
-else if (option==6)
-        {
-            System.out.println("enter the Customer Id you want to view");
-            Integer customerId=in.nextInt();
-            in.nextLine();
-            customerService.viewCustomerProfile(customerId);
-        }
-        else if(option == 7) {
-            FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
-            try {
-                gymApplication.main(null);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-        customerMenu();
     }
 }

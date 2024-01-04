@@ -66,7 +66,7 @@ public class FlipFitGymOwnerService {
         timeSlot.setCustomerId(new ArrayList<>());
 
         System.out.print("Enter Time: ");
-        timeSlot.setTime(scanner.nextLine());
+        timeSlot.setStartTime(scanner.nextLine());
         slotDao.add(timeSlot);
         // Closing the Scanner to avoid resource leak
         scanner.close();
@@ -94,19 +94,25 @@ public class FlipFitGymOwnerService {
         }
     }
 
-    public void createGymOwner(int ownerId, String ownerName, String ownerEmailAddress, int ownerPhone, int ownerGSTNum, boolean isApproved, String ownerAddress,String password) {
-        System.out.println("reached here");
-        GymOwner gymOwner = new GymOwner();
-        // Set the properties of the GymOwner object
-        gymOwner.setPassword(password);
-        gymOwner.setOwnerId(ownerId);
-        gymOwner.setOwnerName(ownerName);
-        gymOwner.setOwnerEmailAddress(ownerEmailAddress);
-        gymOwner.setOwnerPhone(ownerPhone);
-        gymOwner.setOwnerGSTNum(ownerGSTNum);
-        gymOwner.setApproved(isApproved);
-        gymOwner.setOwnerAddress(ownerAddress);
-        System.out.println("setting complete");
+    public void createGymOwner(String email, String password) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Owner Name: ");
+        String ownerName = scanner.nextLine();
+
+        System.out.print("Enter Owner Phone: ");
+        String ownerPhone = scanner.nextLine();
+
+        scanner.nextLine(); // Consume the newline character left by nextInt()
+
+        System.out.print("Enter Owner GST Number: ");
+        int ownerGSTNum = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character left by nextBoolean()
+
+        System.out.print("Enter Owner Address: ");
+        String ownerAddress = scanner.nextLine();
+
+        GymOwner gymOwner = new GymOwner(ownerName,ownerPhone,ownerGSTNum,ownerAddress,email,password);
         System.out.println(gymOwner.getOwnerId());
 
         gymOwnerDao.add(gymOwner);
@@ -200,7 +206,7 @@ public class FlipFitGymOwnerService {
                 System.out.print("Enter New Date: ");
                 sl.setDate(scanner.nextInt());
                 System.out.print("Enter New Time: ");
-                sl.setTime(scanner.nextLine());
+                sl.setStartTime(scanner.nextLine());
                 System.out.println("slots updated!");
                 flag = true;
             }
@@ -212,46 +218,24 @@ public class FlipFitGymOwnerService {
 
     public void editProfile() {
         System.out.println("Edit Profile:");
-        GymOwner gymOwner = new GymOwner();
+
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter Owner ID: ");
-        int ownerId = scanner.nextInt();
+        System.out.print("Enter Email ID: ");
+        String ownerEmailId = scanner.nextLine();
 
         scanner.nextLine(); // Consume the newline character left by nextInt()
         List<GymOwner> allGymOwners = gymOwnerDao.getAllGymOwners();
         boolean flag=false;
         for (GymOwner gymowner :allGymOwners) {
-            if(gymowner.getOwnerId()==ownerId) {
-                System.out.print("Enter Owner Name: ");
-                gymowner.setOwnerName( scanner.nextLine());
-
-                System.out.print("Enter Owner Email Address: ");
-                gymowner.setOwnerAddress( scanner.nextLine());
-
-
-                System.out.print("Enter Owner Phone: ");
-                gymowner.setOwnerPhone(scanner.nextInt());
-
-                scanner.nextLine(); // Consume the newline character left by nextInt()
-
-                System.out.print("Enter Owner GST Number: ");
-                gymowner.setOwnerGSTNum( scanner.nextInt());
-
-                System.out.print("Is Owner Approved? (true/false): ");
-                gymowner.isApproved();
-
-                scanner.nextLine(); // Consume the newline character left by nextBoolean()
-
-
-                System.out.print("Enter Gym Owner Password: ");
-                gymowner.setPassword( scanner.nextLine());
+            if(gymowner.getOwnerEmailAddress()==ownerEmailId) {
+                GymOwner gymOwner1 = new GymOwner(scanner.nextLine(),scanner.nextLine(),scanner.nextInt(),scanner.nextLine(),ownerEmailId,gymowner.getPassword());
                 flag=true;
                 System.out.println("Details Updated");
             }
         }
         if(!flag)
-            System.out.println("Please enter correct id");
+            System.out.println("Please enter correct email");
 
     }
 }

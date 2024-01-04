@@ -170,48 +170,27 @@ public class FlipFitAdminApplicationMenu {
 
 
 
-    public void Login() {
-        Scanner in = new Scanner(System.in);
-
-        // Get admin email and password from the user
-        System.out.print("Enter Admin Email Address: ");
-        String adminEmail = in.nextLine();
-
-        System.out.print("Enter Admin Password: ");
-        String adminPassword = in.nextLine();
-
-        if (flipFitAdminService.isValidAdminCredentials(adminEmail, adminPassword)) {
+    public void Login(String email, String password) {
+        if (flipFitAdminService.isValidAdminCredentials(email, password)) {
             System.out.println("Login successful!");
             AdminPage();
         } else {
-            System.out.println("Invalid credentials. Login failed.");
+            System.out.println("Invalid credentials. Login failed. Please Try again.....");
         }
     }
 
 
 
-    public void register() {
+    public void register(String email, String password) {
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter Admin ID: ");
-        int adminId = scanner.nextInt();
-
-        scanner.nextLine(); // Consume the newline character left by nextInt()
 
         System.out.print("Enter Admin Name: ");
         String adminName = scanner.nextLine();
 
-        System.out.print("Enter Admin Email Address: ");
-        String adminEmailAddress = scanner.nextLine();
-
         System.out.print("Enter Admin Phone: ");
         String phone = scanner.nextLine();
 
-
-
-        System.out.print("Enter Admin Password: ");
-        String password = scanner.nextLine();
-        flipFitAdminService.createAdmin(adminId,adminName,adminEmailAddress,phone,password);
+        flipFitAdminService.createAdmin(adminName,email,phone,password);
         AdminPage();
     }
 
@@ -251,7 +230,7 @@ public class FlipFitAdminApplicationMenu {
                     FlipFitApplicationMenu.mainPage();
                     break;
                 default:
-                    System.out.println("Invalid number");
+                    System.out.println("Please Enter a valid Input......");
             }
         }
 

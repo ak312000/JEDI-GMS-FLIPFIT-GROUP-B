@@ -1,12 +1,22 @@
 package com.flipkart.bean;
 
 public class Customer {
+    private static int startId=100;
     private int customerId;
     private String customerName;
     private String customerAddress;
     private String customerEmailAddress;
-    private int customerPhone;
+    private String customerPhone;
     private String password;
+
+    public Customer(String name, String address, String emailAddress, String phone, String password) {
+        this.customerId=startId++;
+        this.customerName=name;
+        this.customerEmailAddress=emailAddress;
+        this.customerPhone=phone;
+        this.customerAddress=address;
+        this.password=password;
+    }
 
     public String getPassword() {
         return password;
@@ -38,10 +48,10 @@ public class Customer {
     public void setCustomerEmailAddress(String customerEmailAddress) {
         this.customerEmailAddress = customerEmailAddress;
     }
-    public int getCustomerPhone() {
+    public String getCustomerPhone() {
         return customerPhone;
     }
-    public void setCustomerPhone(int customerPhone) {
+    public void setCustomerPhone(String customerPhone) {
         this.customerPhone = customerPhone;
     }
 }

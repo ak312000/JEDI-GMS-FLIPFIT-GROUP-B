@@ -17,9 +17,17 @@ public class FlipFitCustomerDao {
 
         return customers;
     }
-    public static Customer getCustomerById(Integer customerId) {
+    public  Customer getCustomerByemail(String email) {
         for (Customer customer : customers) {
-            if (customer.getCustomerId() == customerId) {
+            if (customer.getCustomerEmailAddress() == email) {
+                return customer;
+            }
+        }
+        return null;  // Customer not found with the specified ID
+    }
+    public Customer getCustomerById(Integer id) {
+        for (Customer customer : customers) {
+            if (customer.getCustomerId() == id) {
                 return customer;
             }
         }
