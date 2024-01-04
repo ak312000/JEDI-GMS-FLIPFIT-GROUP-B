@@ -1,12 +1,15 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.Customer;
+import com.flipkart.bean.GymCenter;
 import com.flipkart.dao.FlipFitCustomerDao;
+import com.flipkart.dao.FlipFitGymCentreDao;
 
 import java.util.*;
 
 public class FlipFitCustomerService {
     FlipFitCustomerDao customerDatabase = new FlipFitCustomerDao();
+    FlipFitGymCentreDao flipFitGymCentreDao=new FlipFitGymCentreDao();
     Customer customer = new Customer();
 
     public void createCustomer(int id, String name, String address,String emailAddress, int phone, String password) {
@@ -20,7 +23,26 @@ public class FlipFitCustomerService {
 
         System.out.println("customer added Successfully");
     }
+    public void editCustomer(Integer customerId,String newName,String newAddress,String newEmail,Integer newPhone )
+    {
+        Customer customer = FlipFitCustomerDao.getCustomerById(customerId);
 
+        if (customer != null) {
+            // Update customer attributes
+            customer.setCustomerName(newName);
+            customer.setCustomerAddress(newAddress);
+            customer.setCustomerEmailAddress(newEmail);
+            customer.setCustomerPhone(newPhone);
+
+            // Save the changes to the DAO layer
+            customerDatabase.updateCustomer(customer);
+
+            System.out.println("Customer details updated successfully.");
+        } else {
+            System.out.println("Customer not found with ID: " + customerId);
+        }
+
+    }
     public void bookSlot(String gym) {
         Map<String, List<String>> gymMap = new HashMap<>();
 
@@ -66,9 +88,21 @@ public class FlipFitCustomerService {
         bookSlot(selectedGym);
     }
 
-    public String getCustomerDetails(){
-        FlipFitCustomerDao customer = new FlipFitCustomerDao();
-        return "get Customer Details";
+    public void viewCustomerProfile(int customerId){
+        Customer customer = customerDatabase.getCustomerById(customerId);
+
+        if (customer != null) {
+            // Display customer details
+            System.out.println("Customer ID: " + customer.getCustomerId());
+            System.out.println("Name: " + customer.getCustomerName());
+            System.out.println("Address: " + customer.getCustomerAddress());
+            System.out.println("Email: " + customer.getCustomerEmailAddress());
+            System.out.println("Phone: " + customer.getCustomerPhone());
+
+            // Additional attributes can be added based on your Customer class
+        } else {
+            System.out.println("Customer not found with ID: " + customerId);
+        }
     }
 
     public boolean viewAllGymCenters(int id) {
@@ -97,5 +131,42 @@ public class FlipFitCustomerService {
             }
         }
         return false; // No matching customer found
+    }
+
+    public void searchAllGyms() {
+
+        List<GymCenter> allGyms =flipFitGymCentreDao.getGymCenters();
+
+        if (allGyms.isEmpty()) {
+            System.out.println("No gyms available.");
+        } else {
+            System.out.println("List of all gyms:");
+            for (GymCenter gym : allGyms) {
+                System.out.println("Gym ID: " + gym.getId());
+                System.out.println("Gym Name: " + gym.getGymName());
+                System.out.println("Gym Address: " + gym.getGymLocation());
+                // Add more attributes as needed
+                System.out.println();
+            }
+        }
+
+    }
+    public void searchGymOnLocation(String location) {
+
+        List<GymCenter> gymsByLocation = flipFitGymCentreDao.searchGymsByLocation(location);
+
+        if (gymsByLocation.isEmpty()) {
+            System.out.println("No gyms found in the specified location: " + location);
+        } else {
+            System.out.println("List of gyms in location " + location + ":");
+            for (GymCenter gym : gymsByLocation) {
+                System.out.println("Gym ID: " + gym.getId());
+                System.out.println("Gym Name: " + gym.getGymName());
+                System.out.println("Gym Address: " + gym.getGymLocation());
+                // Add more attributes as needed
+                System.out.println();
+            }
+        }
+
     }
 }
