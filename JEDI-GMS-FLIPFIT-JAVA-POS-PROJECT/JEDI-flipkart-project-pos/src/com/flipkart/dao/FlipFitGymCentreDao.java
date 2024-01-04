@@ -1,6 +1,7 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.GymCenter;
+import com.flipkart.bean.GymOwner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +24,13 @@ public class FlipFitGymCentreDao {
             }
         }
         return PendingGymCentres;
+    }
+
+    public void approve(Integer id) {
+        for(GymCenter gymCenter:gymCenters){
+            if(gymCenter.getId()==id){
+                gymCenter.setApproved(true);
+            }
+        }
     }
 }

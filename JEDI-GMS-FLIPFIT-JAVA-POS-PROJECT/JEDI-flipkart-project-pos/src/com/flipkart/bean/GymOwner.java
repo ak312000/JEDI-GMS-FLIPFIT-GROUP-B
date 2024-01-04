@@ -61,6 +61,7 @@ public class GymOwner {
     public void setOwnerAddress(String ownerAddress) {
         this.ownerAddress = ownerAddress;
     }
+
 }
 
 

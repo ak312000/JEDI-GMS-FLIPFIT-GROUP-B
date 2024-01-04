@@ -161,13 +161,7 @@ public class FlipFitAdminApplicationMenu {
 //
 //    }
 
-    public void approveGymOwner(Scanner in) {
-        // TODO Auto-generated method stub
-        System.out.println("Enter the owner email: ");
-        Integer id = in.nextInt();
-        flipFitAdminService.approveGymOwnerRegistration(id);
 
-    }
 
 
 
@@ -248,10 +242,10 @@ public class FlipFitAdminApplicationMenu {
                     flipFitAdminService.viewPendingGymCentres();
                     break;
                 case 5:
-                    approveGymOwner(in);
+                    flipFitAdminService.approveGymOwner();
                     break;
                 case 6:
-//                    approveGymCentre(in);
+                    flipFitAdminService.approveGymCentre();
                     break;
                 case 7:
                     FlipFitApplicationMenu.mainPage();
