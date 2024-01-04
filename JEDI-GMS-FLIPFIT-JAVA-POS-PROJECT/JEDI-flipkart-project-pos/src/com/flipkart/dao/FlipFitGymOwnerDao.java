@@ -18,11 +18,16 @@ public class FlipFitGymOwnerDao {
 
     }
     public List<GymOwner> getAllGymOwners() {
-        // Your database logic to fetch all admins goes here
-        // For example, you might use JDBC or an ORM framework
-
-        // For demonstration purposes, let's create a sample list of admins
-
         return gymOwnerList;
+    }
+
+    public List<GymOwner> viewPendingGymOwnerRequests() {
+        List<GymOwner> PendingGymOwners = new ArrayList<>();
+        for(GymOwner gymOwner:gymOwnerList){
+            if(!gymOwner.isApproved()){
+                PendingGymOwners.add(gymOwner);
+            }
+        }
+        return PendingGymOwners;
     }
 }
