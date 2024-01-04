@@ -24,4 +24,14 @@ public class FlipFitGymCentreDao {
         }
         return PendingGymCentres;
     }
+
+    public List<GymCenter> viewApprovedGymCentres() {
+        List<GymCenter> ApprovedGymCentres = new ArrayList<>();
+        for(GymCenter gymCenter:gymCenters){
+            if(gymCenter.isApproved()){
+                ApprovedGymCentres.add(gymCenter);
+            }
+        }
+        return ApprovedGymCentres;
+    }
 }

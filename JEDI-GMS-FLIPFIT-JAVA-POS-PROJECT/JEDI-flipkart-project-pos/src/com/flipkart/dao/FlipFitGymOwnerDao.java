@@ -30,4 +30,5 @@ public class FlipFitGymOwnerDao {
         }
         return PendingGymOwners;
     }
+
 }

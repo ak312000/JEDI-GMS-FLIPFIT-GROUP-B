@@ -1,5 +1,7 @@
 package com.flipkart.bean;
 
+import java.util.List;
+
 public class TimeSlot {
     private int gymId;
     public int getGymId() {
@@ -20,12 +22,6 @@ public class TimeSlot {
     public void setDate(int date) {
         this.date = date;
     }
-    public int getCustomerId() {
-        return customerId;
-    }
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
     public String getTime() {
         return time;
     }
@@ -34,6 +30,14 @@ public class TimeSlot {
     }
     private int slotId;
     private int date;
-    private int customerId;
+    private List<Integer> customerId;
     private String time;
+
+    public List<Integer> getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(List<Integer> customerId) {
+        this.customerId = customerId;
+    }
 }

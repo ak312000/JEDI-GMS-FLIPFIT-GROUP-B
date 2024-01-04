@@ -129,9 +129,31 @@ gymOwnerMenu();
         System.out.println("8. Exit");
 
         op1 = in.nextInt();
-        if(op1 == 8) {
-            FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
-            gymApplication.main(null);
-        }
+        switch(op1){
+            case 1:
+                gymOwner.registerGymCenter();
+                break;
+            case 2:
+                gymOwner.addSlots();
+                break;
+            case 3:
+                gymOwner.viewAllApprovedGymCenters();
+                break;
+            case 4:
+                gymOwner.viewAllSlots();
+                break;
+            case 5:
+                gymOwner.editGym();
+                break;
+            case 6:
+                gymOwner.editSlots();
+                break;
+            case 7:
+                gymOwner.editProfile();
+                break;
+            default:
+                System.out.println("Exit");
+                break;
     }
-}
+        gymOwnerMenu();
+}}
