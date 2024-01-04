@@ -17,6 +17,16 @@ public class GymCenter {
         this.numOfSeats = numOfSeats;
     }
 
+    public GymCenter() {
+        this.id = 0;
+        this.gymName = null;
+        this.gymEmailAddress = null;
+        this.isApproved = false;
+        this.gymLocation = null;
+        this.numOfSeats = 10;
+
+    }
+
     public int getId() {
         return id;
     }

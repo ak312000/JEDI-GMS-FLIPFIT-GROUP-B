@@ -22,7 +22,7 @@ public class FlipFitGymCentreDao {
         // Add more gym centers as needed
     }
 
-    private void add(GymCenter gymCenter) {
+    public void add(GymCenter gymCenter) {
         gymCenters.add(gymCenter);
     }
 

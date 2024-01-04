@@ -116,44 +116,49 @@ gymOwnerMenu();
     public static void gymOwnerMenu() {
         // TODO Auto-generated method stub
         FlipFitGymOwnerService gymOwner = new FlipFitGymOwnerService();
-        Scanner in = new Scanner(System.in);
+
         int op1;
 
-        System.out.println("1. Gym Registration");
-        System.out.println("2. Add new slots");
-        System.out.println("3. View Registered Gyms");
-        System.out.println("4. View Registered and free slots");
-        System.out.println("5. Edit Gym details");
-        System.out.println("6. Edit slots");
-        System.out.println("7. Edit Profile");
-        System.out.println("8. Exit");
 
-        op1 = in.nextInt();
-        switch(op1){
-            case 1:
-                gymOwner.registerGymCenter();
-                break;
-            case 2:
-                gymOwner.addSlots();
-                break;
-            case 3:
-                gymOwner.viewAllApprovedGymCenters();
-                break;
-            case 4:
-                gymOwner.viewAllSlots();
-                break;
-            case 5:
-                gymOwner.editGym();
-                break;
-            case 6:
-                gymOwner.editSlots();
-                break;
-            case 7:
-                gymOwner.editProfile();
-                break;
-            default:
-                System.out.println("Exit");
-                break;
-    }
-        gymOwnerMenu();
+        boolean flag=true;
+        while(flag) {
+            System.out.println("1. Gym Registration");
+            System.out.println("2. Add new slots");
+            System.out.println("3. View Registered Gyms");
+            System.out.println("4. View Registered and free slots");
+            System.out.println("5. Edit Gym details");
+            System.out.println("6. Edit slots");
+            System.out.println("7. Edit Profile");
+            System.out.println("8. Exit");
+
+            Scanner in = new Scanner(System.in);
+            op1 = in.nextInt();
+            switch (op1) {
+                case 1:
+                    gymOwner.registerGymCenter();
+                    break;
+                case 2:
+                    gymOwner.addSlots();
+                    break;
+                case 3:
+                    gymOwner.viewAllApprovedGymCenters();
+                    break;
+                case 4:
+                    gymOwner.viewAllSlots();
+                    break;
+                case 5:
+                    gymOwner.editGym();
+                    break;
+                case 6:
+                    gymOwner.editSlots();
+                    break;
+                case 7:
+                    gymOwner.editProfile();
+                    break;
+                default:
+                    flag=false;
+                    System.out.println("Exit");
+                    break;
+            }
+        }
 }}

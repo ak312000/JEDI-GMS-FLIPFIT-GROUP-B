@@ -131,25 +131,21 @@ public class FlipFitGymOwnerService {
         // Creating a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
 
-        // Taking input for each property
         System.out.print("Enter Gym ID: ");
         gym.setId(scanner.nextInt());
 
-        scanner.nextLine(); // Consume the newline character
-
         System.out.print("Enter Gym Name: ");
-        gym.setGymName(scanner.nextLine());
+        gym.setGymName(scanner.next());
 
         System.out.print("Enter Gym Email Address: ");
-        gym.setGymEmailAddress(scanner.nextLine());
+        gym.setGymEmailAddress(scanner.next());
 
         System.out.print("Enter Gym Location: ");
-        gym.setGymLocation(scanner.nextLine());
+        gym.setGymLocation(scanner.next());
 
         System.out.print("Enter Number of Seats in a Slot: ");
         gym.setNumOfSeats(scanner.nextInt());
 
-        // Closing the Scanner to avoid resource leak
         scanner.close();
         gymcenterDao.add(gym);
         System.out.println("Registered Successfully!");
