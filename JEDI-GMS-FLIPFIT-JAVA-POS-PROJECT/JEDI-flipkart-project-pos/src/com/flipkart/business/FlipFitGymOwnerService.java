@@ -33,6 +33,7 @@ public class FlipFitGymOwnerService {
         Scanner in=new Scanner(System.in);
         System.out.println("Enter GymId whose slot need to check:");
         int gymId=  in.nextInt();
+        in.nextLine();
         List<TimeSlot> slots=slotDao.viewAllSlots(gymId);
         System.out.println();
         System.out.println("--------------------------------------------------------------------");
@@ -64,33 +65,27 @@ public class FlipFitGymOwnerService {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter Gym id: ");
         int gymId= scanner.nextInt();
-        System.out.print("Enter Gym id: ");
+        scanner.nextLine();
+        System.out.print("Enter Day of Booking: ");
         String day= scanner.nextLine();
-        System.out.print("Enter Gym id: ");
+        System.out.print("Enter Start Time: ");
         String startTime= scanner.nextLine();
-        System.out.print("Enter Gym id: ");
+        System.out.print("Enter End Time: ");
         String endTime= scanner.nextLine();
         TimeSlot timeSlot = new TimeSlot(gymId,day,startTime,endTime);
         slotDao.add(timeSlot);
-        scanner.close();
     }
 
-    public boolean addGym(int id) {
-        System.out.println("add gym");
-        return true;
-    }
 
-    public boolean createSlot(int id) {
-        System.out.println("create slot");
-        return true;
-    }
+
+
 
     public void viewAllGymCenters() {
         System.out.println("view All Gym Centers");
     }
 
     public void viewAllApprovedGymCenters() {
-        System.out.println("viewing All Approved Gym Centers");
+        System.out.println("Viewing All Gym Centers");
         List<GymCenter> ApprovedGymCentres=gymcenterDao.viewApprovedGymCentres();
         for(GymCenter gymCenter:ApprovedGymCentres){
             System.out.println(gymCenter);
@@ -151,7 +146,7 @@ public class FlipFitGymOwnerService {
         int gymNoOfSlots=scanner.nextInt();
         GymCenter gym = new GymCenter(gymName,gymEmail,gymLocation,gymNoOfSlots);
 
-        scanner.close();
+
         gymcenterDao.add(gym);
         System.out.println("Gym Centre Registered Successfully!");
 
@@ -195,8 +190,10 @@ public class FlipFitGymOwnerService {
         boolean flag=false;
         System.out.print("Enter Gym ID: ");
         int gymId=scanner.nextInt();
+        scanner.nextLine();
         System.out.print("Enter Slot ID: ");
         int slotId=scanner.nextInt();
+        scanner.nextLine();
         List<TimeSlot> allSlots = slotDao.viewAllSlots(gymId);
         for (TimeSlot sl :allSlots) {
             if (sl.getSlotId()==slotId) {
