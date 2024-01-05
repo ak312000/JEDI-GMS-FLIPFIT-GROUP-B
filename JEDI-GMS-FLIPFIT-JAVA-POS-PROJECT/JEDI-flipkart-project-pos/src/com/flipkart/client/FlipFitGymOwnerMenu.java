@@ -79,14 +79,14 @@ public class FlipFitGymOwnerMenu {
     public void gymOwnerMenu() {
         while(true) {
             Scanner in = new Scanner(System.in);
-            System.out.println("1. Gym Registration");
-            System.out.println("2. Add new slots");
-            System.out.println("3. View Registered Gym Centres");
-            System.out.println("4. View All slots for a Gym");
-            System.out.println("5. Edit Gym details");
-            System.out.println("6. Edit slots");
-            System.out.println("7. Edit Profile");
-            System.out.println("8. Exit");
+            System.out.println("\u001B[92m1. Gym Registration\u001B[0m");
+            System.out.println("\u001B[92m2. Add new slots\u001B[0m");
+            System.out.println("\u001B[92m3. View Registered Gym Centres\u001B[0m");
+            System.out.println("\u001B[92m4. View All slots for a Gym\u001B[0m");
+            System.out.println("\u001B[92m5. Edit Gym details\u001B[0m");
+            System.out.println("\u001B[92m6. Edit slots\u001B[0m");
+            System.out.println("\u001B[92m7. Edit Profile\u001B[0m");
+            System.out.println("\u001B[95m8. Exit\u001B[0m");
             int op1 = in.nextInt();
             switch (op1) {
                 case 1:

@@ -13,6 +13,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FlipFitGymOwnerService {
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
     FlipFitGymOwnerDao gymOwnerDao = new FlipFitGymOwnerDao();
     FlipFitGymCentreDao gymcenterDao = new FlipFitGymCentreDao();
 
@@ -28,6 +37,14 @@ public class FlipFitGymOwnerService {
         return "get Owner Details";
     }
 
+    private static void beautifyPrint(String... columns) {
+        System.out.print(ANSI_CYAN);
+        for (String column : columns) {
+            System.out.printf("%-15s ", column);
+        }
+        System.out.println(ANSI_RESET);
+    }
+
     public void viewAllSlots() {
         System.out.println("View All Slots");
         Scanner in=new Scanner(System.in);
@@ -36,8 +53,9 @@ public class FlipFitGymOwnerService {
         List<TimeSlot> slots=slotDao.viewAllSlots(gymId);
         System.out.println();
         System.out.println("--------------------------------------------------------------------");
-        System.out.printf("%-15s %-13s %-16s %-12s %12s %n", "SlotId", "GymId", "Day", "startTime", "EndTime");
-        System.out.println("------------------------------------------------------------------");
+        beautifyPrint("SlotId", "GymId", "Day", "startTime", "EndTime");
+        System.out.println("--------------------------------------------------------------------");
+
         for(TimeSlot slot: slots) {
 
             System.out.printf("%-16s", slot.getSlotId());

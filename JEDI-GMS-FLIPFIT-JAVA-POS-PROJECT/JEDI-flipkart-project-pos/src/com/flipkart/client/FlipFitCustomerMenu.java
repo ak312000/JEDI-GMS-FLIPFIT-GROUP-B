@@ -99,14 +99,16 @@ public class FlipFitCustomerMenu {
         Scanner in = new Scanner(System.in);
         int option;
 
-        System.out.println("1. Search all Gyms");
-        System.out.println("2. Search Gyms by location");
-        System.out.println("3. View Booked slots");
-        System.out.println("4. Cancel Booking");
-        System.out.println("5. Make Payment");
-        System.out.println("6. Edit Profile");
-        System.out.println("7. View Profile");
-        System.out.println("8. Exit");
+        System.out.println("\u001B[96mCustomer Menu:\u001B[0m");
+        System.out.println("\u001B[92m1. Search all Gyms\u001B[0m");
+        System.out.println("\u001B[92m2. Search Gyms by location\u001B[0m");
+        System.out.println("\u001B[92m3. View Booked Slots\u001B[0m");
+        System.out.println("\u001B[92m4. Cancel Booking\u001B[0m");
+        System.out.println("\u001B[92m5. Make Payment\u001B[0m");
+        System.out.println("\u001B[92m6. Edit Profile\u001B[0m");
+        System.out.println("\u001B[92m7. View Profile\u001B[0m");
+        System.out.println("\u001B[95m8. Exit\u001B[0m");
+
 
         option = in.nextInt();
 
