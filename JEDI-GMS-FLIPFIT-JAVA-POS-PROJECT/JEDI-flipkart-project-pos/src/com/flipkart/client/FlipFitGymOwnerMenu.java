@@ -72,22 +72,17 @@ public class FlipFitGymOwnerMenu {
 
     }
     public void register(String email,String password){
-
         flipFitGymOwnerService.createGymOwner(email,password);
         gymOwnerMenu();
     }
 
     public void gymOwnerMenu() {
-
-
-
-
         while(true) {
             Scanner in = new Scanner(System.in);
             System.out.println("1. Gym Registration");
             System.out.println("2. Add new slots");
-            System.out.println("3. View Registered Gyms");
-            System.out.println("4. View Registered and free slots");
+            System.out.println("3. View Registered Gym Centres");
+            System.out.println("4. View All slots for a Gym");
             System.out.println("5. Edit Gym details");
             System.out.println("6. Edit slots");
             System.out.println("7. Edit Profile");

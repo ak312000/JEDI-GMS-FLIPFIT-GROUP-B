@@ -16,9 +16,9 @@ public class FlipFitGymCentreDao {
     }
 
     private void initializeGymCenters() {
-        add(new GymCenter(1, "Fitness Hub", "A@gmail.com", true, "Location", 100));
-        add(new GymCenter(2, "Power Fitness", "b@gmail.com", true, "ownerB@example.com", 200));
-        add(new GymCenter(3, "Gym World", "c@gmail.com", true, "ownerC@example.com", 87));
+        add(new GymCenter( "Fitness Hub", "A@gmail.com", "Location", 100));
+        add(new GymCenter( "Power Fitness", "b@gmail.com" , "ownerB@example.com", 200));
+        add(new GymCenter( "Gym World", "c@gmail.com", "ownerC@example.com", 87));
         // Add more gym centers as needed
     }
 

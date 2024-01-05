@@ -1,37 +1,38 @@
 package com.flipkart.bean;
 
 public class GymCenter {
-    private int id;
+    private static int gymCentreIdNum = 100;
+    private int gymCentreId;
     private String gymName;
     private String gymEmailAddress;
     private boolean isApproved;
     private String gymLocation;
     private int numOfSeats;
 
-    public GymCenter(int id, String gymName, String gymEmailAddress, boolean isApproved, String gymLocation, int numOfSeats) {
-        this.id = id;
+    public GymCenter( String gymName, String gymEmailAddress, String gymLocation, int numOfSeats) {
+        this.gymCentreId = gymCentreIdNum++;
         this.gymName = gymName;
         this.gymEmailAddress = gymEmailAddress;
-        this.isApproved = isApproved;
+        this.isApproved = false;
         this.gymLocation = gymLocation;
         this.numOfSeats = numOfSeats;
     }
 
-    public GymCenter() {
-        this.id = 0;
-        this.gymName = null;
-        this.gymEmailAddress = null;
-        this.isApproved = false;
-        this.gymLocation = null;
-        this.numOfSeats = 10;
-
-    }
+//    public GymCenter() {
+//        this.gymCentreId = gymCentreIdNum++;
+//        this.gymName = null;
+//        this.gymEmailAddress = null;
+//        this.isApproved = false;
+//        this.gymLocation = null;
+//        this.numOfSeats = 10;
+//
+//    }
 
     public int getId() {
-        return id;
+        return gymCentreId;
     }
     public void setId(int id) {
-        this.id = id;
+        this.gymCentreId = id;
     }
     public String getGymName() {
         return gymName;

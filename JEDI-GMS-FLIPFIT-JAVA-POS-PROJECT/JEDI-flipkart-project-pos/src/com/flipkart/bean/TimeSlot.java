@@ -1,9 +1,25 @@
 package com.flipkart.bean;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimeSlot {
+    static int slotIdNum = 100;
     private int gymId;
+
+
+    public TimeSlot(int gymId, String day, String start, String end) {
+        this.slotId = slotIdNum++;
+        this.day=day;
+        this.gymId=gymId;
+        this.startTime=  start;
+        this.endTime=  end;
+    }
+
     public int getGymId() {
         return gymId;
     }
@@ -16,17 +32,19 @@ public class TimeSlot {
     public void setSlotId(int slotId) {
         this.slotId = slotId;
     }
-    public int getDate() {
-        return date;
-    }
-    public void setDate(int date) {
-        this.date = date;
-    }
     private int slotId;
-    private int date;
-    private List<Integer> customerId;
+    private String day;
+    private final List<Integer> customerId = new ArrayList<>();
     private String startTime;
     private String endTime;
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public String getStartTime() {
         return startTime;
@@ -46,9 +64,5 @@ public class TimeSlot {
 
     public List<Integer> getCustomerId() {
         return customerId;
-    }
-
-    public void setCustomerId(List<Integer> customerId) {
-        this.customerId = customerId;
     }
 }

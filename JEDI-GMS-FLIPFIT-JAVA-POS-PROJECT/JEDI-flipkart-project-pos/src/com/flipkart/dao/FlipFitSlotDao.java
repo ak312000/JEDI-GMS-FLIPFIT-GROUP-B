@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.TimeSlot;
 
 import java.util.ArrayList;
@@ -13,7 +14,13 @@ public class FlipFitSlotDao {
         System.out.println("slot dao added ");
     }
 
-    public List<TimeSlot> viewAllSlots() {
-        return timeSlotList;
+    public List<TimeSlot> viewAllSlots(int gymId) {
+        List<TimeSlot> timeSlotOfAGym = new ArrayList<>();
+        for(TimeSlot timeSlot:timeSlotList){
+            if(timeSlot.getGymId()==gymId){
+                timeSlotOfAGym.add(timeSlot);
+            }
+        }
+        return timeSlotOfAGym;
     }
 }

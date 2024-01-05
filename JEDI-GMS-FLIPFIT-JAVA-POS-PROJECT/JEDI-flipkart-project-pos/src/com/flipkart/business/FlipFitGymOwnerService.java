@@ -29,12 +29,25 @@ public class FlipFitGymOwnerService {
     }
 
     public void viewAllSlots() {
-
         System.out.println("View All Slots");
-        List<TimeSlot> slots=slotDao.viewAllSlots();
-        for(TimeSlot slot:slots){
-            System.out.println(slot);
+        Scanner in=new Scanner(System.in);
+        System.out.println("Enter GymId whose slot need to check:");
+        int gymId=  in.nextInt();
+        List<TimeSlot> slots=slotDao.viewAllSlots(gymId);
+        System.out.println();
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("%-15s %-13s %-16s %-12s %12s %n", "SlotId", "GymId", "Day", "startTime", "EndTime");
+        System.out.println("------------------------------------------------------------------");
+        for(TimeSlot slot: slots) {
+
+            System.out.printf("%-16s", slot.getSlotId());
+            System.out.printf("%-16s", slot.getGymId());
+            System.out.printf("%-16s", slot.getDay());
+            System.out.printf("%-18s", slot.getStartTime());
+            System.out.printf("%-18s", slot.getStartTime());
+            System.out.println("");
         }
+        System.out.println("--------------------------------------------------------------------");
     }
 
     public boolean isApprovedGymOwner(int id) {
@@ -48,27 +61,17 @@ public class FlipFitGymOwnerService {
     }
 
     public void addSlots() {
-        TimeSlot timeSlot = new TimeSlot();
-
-        // Creating a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
-
-        // Taking input for each property
-        System.out.print("Enter Gym ID: ");
-        timeSlot.setGymId(scanner.nextInt());
-
-        System.out.print("Enter Slot ID: ");
-        timeSlot.setSlotId(scanner.nextInt());
-
-        System.out.print("Enter Date: ");
-        timeSlot.setDate(scanner.nextInt());
-
-        timeSlot.setCustomerId(new ArrayList<>());
-
-        System.out.print("Enter Time: ");
-        timeSlot.setStartTime(scanner.nextLine());
+        System.out.print("Enter Gym id: ");
+        int gymId= scanner.nextInt();
+        System.out.print("Enter Gym id: ");
+        String day= scanner.nextLine();
+        System.out.print("Enter Gym id: ");
+        String startTime= scanner.nextLine();
+        System.out.print("Enter Gym id: ");
+        String endTime= scanner.nextLine();
+        TimeSlot timeSlot = new TimeSlot(gymId,day,startTime,endTime);
         slotDao.add(timeSlot);
-        // Closing the Scanner to avoid resource leak
         scanner.close();
     }
 
@@ -87,7 +90,7 @@ public class FlipFitGymOwnerService {
     }
 
     public void viewAllApprovedGymCenters() {
-        System.out.println("view All Approved Gym Centers");
+        System.out.println("viewing All Approved Gym Centers");
         List<GymCenter> ApprovedGymCentres=gymcenterDao.viewApprovedGymCentres();
         for(GymCenter gymCenter:ApprovedGymCentres){
             System.out.println(gymCenter);
@@ -133,34 +136,31 @@ public class FlipFitGymOwnerService {
     }
 
     public void registerGymCenter() {
-        GymCenter gym = new GymCenter();
+
         // Creating a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter Gym ID: ");
-        gym.setId(scanner.nextInt());
-
         System.out.print("Enter Gym Name: ");
-        gym.setGymName(scanner.next());
+        String gymName= scanner.nextLine();
 
         System.out.print("Enter Gym Email Address: ");
-        gym.setGymEmailAddress(scanner.next());
+        String gymEmail=scanner.nextLine();
 
         System.out.print("Enter Gym Location: ");
-        gym.setGymLocation(scanner.next());
+        String gymLocation=scanner.nextLine();
 
         System.out.print("Enter Number of Seats in a Slot: ");
-        gym.setNumOfSeats(scanner.nextInt());
+        int gymNoOfSlots=scanner.nextInt();
+        GymCenter gym = new GymCenter(gymName,gymEmail,gymLocation,gymNoOfSlots);
 
         scanner.close();
         gymcenterDao.add(gym);
-        System.out.println("Registered Successfully!");
+        System.out.println("Gym Centre Registered Successfully!");
 
     }
 
     public void editGym() {
-        System.out.println("Edit the gym details:");
-        GymCenter gym = new GymCenter();
+        System.out.println("Edit the gym Centre details:");
         // Creating a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
         boolean flag=false;
@@ -193,21 +193,22 @@ public class FlipFitGymOwnerService {
 
     public void editSlots() {
         System.out.println("Edit the slot details:");
-        TimeSlot slot = new TimeSlot();
-        // Creating a Scanner object for user input
         Scanner scanner = new Scanner(System.in);
         boolean flag=false;
-        // Taking input for each property
+        System.out.print("Enter Gym ID: ");
+        int gymId=scanner.nextInt();
         System.out.print("Enter Slot ID: ");
-        int id=scanner.nextInt();
-        List<TimeSlot> allSlots = slotDao.viewAllSlots();
+        int slotId=scanner.nextInt();
+        List<TimeSlot> allSlots = slotDao.viewAllSlots(gymId);
         for (TimeSlot sl :allSlots) {
-            if (sl.getSlotId()==id) {
-                System.out.print("Enter New Date: ");
-                sl.setDate(scanner.nextInt());
-                System.out.print("Enter New Time: ");
+            if (sl.getSlotId()==slotId) {
+                System.out.print("Enter New Day: ");
+                sl.setDay(scanner.nextLine());
+                System.out.print("Enter New Start Time for this slot: ");
                 sl.setStartTime(scanner.nextLine());
-                System.out.println("slots updated!");
+                System.out.print("Enter New End Time for this slot: ");
+                sl.setEndTime(scanner.nextLine());
+                System.out.println("slot updated!");
                 flag = true;
             }
         }
@@ -217,21 +218,26 @@ public class FlipFitGymOwnerService {
     }
 
     public void editProfile() {
-        System.out.println("Edit Profile:");
+        System.out.println("Editing Profile:");
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter Email ID: ");
         String ownerEmailId = scanner.nextLine();
-
-        scanner.nextLine(); // Consume the newline character left by nextInt()
         List<GymOwner> allGymOwners = gymOwnerDao.getAllGymOwners();
         boolean flag=false;
         for (GymOwner gymowner :allGymOwners) {
-            if(gymowner.getOwnerEmailAddress()==ownerEmailId) {
-                GymOwner gymOwner1 = new GymOwner(scanner.nextLine(),scanner.nextLine(),scanner.nextInt(),scanner.nextLine(),ownerEmailId,gymowner.getPassword());
+            if(gymowner.getOwnerEmailAddress().equals(ownerEmailId)) {
+                System.out.print("Enter New Owner Name ");
+                gymowner.setOwnerName(scanner.nextLine());
+                System.out.print("Enter New Phone number ");
+                gymowner.setOwnerPhone(scanner.nextLine());
+                System.out.print("Enter New GST Number ");
+                gymowner.setOwnerGSTNum(scanner.nextInt());
+                System.out.print("Enter New Adress ");
+                gymowner.setOwnerAddress(scanner.nextLine());
+                System.out.println("Gym Owner Details updated!");
                 flag=true;
-                System.out.println("Details Updated");
             }
         }
         if(!flag)
