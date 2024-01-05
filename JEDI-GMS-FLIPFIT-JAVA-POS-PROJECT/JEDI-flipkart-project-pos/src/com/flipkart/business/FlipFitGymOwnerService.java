@@ -106,8 +106,6 @@ public class FlipFitGymOwnerService {
         System.out.print("Enter Owner Phone: ");
         String ownerPhone = scanner.nextLine();
 
-        scanner.nextLine(); // Consume the newline character left by nextInt()
-
         System.out.print("Enter Owner GST Number: ");
         int ownerGSTNum = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character left by nextBoolean()
