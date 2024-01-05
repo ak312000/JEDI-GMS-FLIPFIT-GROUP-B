@@ -1,5 +1,8 @@
 package com.flipkart.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Customer {
     private static int startId=100;
     private int customerId;
@@ -9,6 +12,7 @@ public class Customer {
     private String customerPhone;
     private String password;
 
+    private static List<Booking> bookings= new ArrayList<>();
     public Customer(String name, String address, String emailAddress, String phone, String password) {
         this.customerId=startId++;
         this.customerName=name;
@@ -16,6 +20,14 @@ public class Customer {
         this.customerPhone=phone;
         this.customerAddress=address;
         this.password=password;
+    }
+
+    public List<Booking> getBookings() {
+        return bookings;
+    }
+
+    public void setBookings(List<Booking> bookings) {
+        Customer.bookings = bookings;
     }
 
     public String getPassword() {

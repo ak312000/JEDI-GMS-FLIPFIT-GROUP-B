@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.GymOwner;
 
@@ -48,7 +49,6 @@ public class FlipFitGymCentreDao {
                 gymsInLocation.add(gym);
             }
         }
-
         return gymsInLocation;
     }
 
@@ -61,12 +61,26 @@ public class FlipFitGymCentreDao {
     }
 
     public List<GymCenter> viewApprovedGymCentres() {
-        List<GymCenter> ApprovedGymCentres = new ArrayList<>();
-        for(GymCenter gymCenter:gymCenters){
-            if(gymCenter.isApproved()){
-                ApprovedGymCentres.add(gymCenter);
-            }
-        }
-        return ApprovedGymCentres;
+        List<GymCenter> approvedGymCentres = new ArrayList<>();
+        approvedGymCentres.addAll(gymCenters);
+        displayGymCentres(approvedGymCentres); // Call a separate method to display GymCenters
+        return approvedGymCentres;
     }
+    private void displayGymCentres(List<GymCenter> gymCentres) {
+        System.out.println();
+        System.out.println("--------------------------------------------------------------------");
+        System.out.printf("%-7s %-20s %-15s %-12s %n", "ID", "Name", "Location", "Approved");
+        System.out.println("------------------------------------------------------------------");
+
+        for (GymCenter gymCenter : gymCentres) {
+            System.out.printf("%-7d %-20s %-15s %-12s %n",
+                    gymCenter.getId(),
+                    gymCenter.getGymName(),
+                    gymCenter.getGymLocation(),
+                    gymCenter.isApproved());
+        }
+
+        System.out.println("--------------------------------------------------------------------");
+    }
+
 }
