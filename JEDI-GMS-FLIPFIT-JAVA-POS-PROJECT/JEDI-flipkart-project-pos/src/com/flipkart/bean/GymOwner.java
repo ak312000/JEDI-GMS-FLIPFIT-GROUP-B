@@ -22,7 +22,7 @@ public class GymOwner {
     private String ownerAddress;
 
 
-    public GymOwner(String ownerName, String ownerPhone, int ownerGSTNum, String ownerAddress, String email, String password) {
+    public GymOwner(String ownerName, String ownerPhone, int ownerGSTNum, String ownerAddress, String email, String password,boolean isApproved) {
         this.ownerEmailAddress=email;
         this.ownerGSTNum = ownerGSTNum;
         this.ownerId=startId++;
@@ -31,6 +31,7 @@ public class GymOwner {
         this.ownerGSTNum = ownerGSTNum;
         this.ownerAddress = ownerAddress;
         this.password=password;
+        this.isApproved=isApproved;
     }
 
 
