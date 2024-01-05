@@ -115,7 +115,7 @@ public class FlipFitGymOwnerService {
         System.out.print("Enter Owner Address: ");
         String ownerAddress = scanner.nextLine();
 
-        GymOwner gymOwner = new GymOwner(ownerName,ownerPhone,ownerGSTNum,ownerAddress,email,password);
+        GymOwner gymOwner = new GymOwner(ownerName,ownerPhone,ownerGSTNum,ownerAddress,email,password,true);
         System.out.println(gymOwner.getOwnerId());
 
         gymOwnerDao.add(gymOwner);

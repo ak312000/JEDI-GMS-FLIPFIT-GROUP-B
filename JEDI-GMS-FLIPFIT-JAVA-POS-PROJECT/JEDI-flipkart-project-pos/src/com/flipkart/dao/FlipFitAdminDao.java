@@ -9,13 +9,8 @@ public class FlipFitAdminDao {
     static List<Admin> admins = new ArrayList<>();
 
     public void add(Admin admin) {
-        System.out.println(admin.getAdminId());
         admins.add(admin);
-        for (Admin ad : admins) {
-            System.out.println("email"+ad.getAdminEmailAddress());
-            System.out.println("pass"+ad.getPassword());
-        }
-        System.out.println("Admin data successfully added");
+        System.out.println("Admin added successfully");
     }
 
     public List<Admin> getAllAdmins() {

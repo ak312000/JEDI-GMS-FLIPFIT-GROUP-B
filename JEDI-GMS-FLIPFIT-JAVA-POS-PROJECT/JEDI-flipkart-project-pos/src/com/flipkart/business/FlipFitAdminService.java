@@ -38,24 +38,22 @@ public class FlipFitAdminService {
         List<GymOwner> gymOwnerDetails = gymOwnerDao.getAllGymOwners();
         System.out.println();
         System.out.println("--------------------------------------------------------------------");
-        System.out.printf("%-15s %-13s %-16s %-12s %12s %n", "Email", "Name", "Address", "GST Number", "Approved");
+        System.out.printf("%-7s %-15s %-13s %-16s %-12s %12s %n", "Owner ID", "Email", "Name", "Address", "GST Number", "Approved");
         System.out.println("------------------------------------------------------------------");
-        for(GymOwner owner: gymOwnerDetails) {
 
-            System.out.printf("%-16s", owner.getOwnerEmailAddress());
-            System.out.printf("%-16s", owner.getOwnerName());
-            System.out.printf("%-16s", owner.getOwnerAddress());
-            System.out.printf("%-18s", owner.getOwnerGSTNum());
-            if(owner.isApproved())
-            {
-                System.out.printf("%-18s", "Yes");
-            }
-            else
-            {
-                System.out.printf("%-18s", "No");
-            }
-            System.out.println("");
+// Assuming gymOwnersList is a list of GymOwner objects
+        List<GymOwner> gymOwnersList = gymOwnerDao.getAllGymOwners();
+
+        for (GymOwner gymOwner : gymOwnersList) {
+            System.out.printf("%-7d %-15s %-13s %-16s %-12d %12s %n",
+                    gymOwner.getOwnerId(),
+                    gymOwner.getOwnerEmailAddress(),
+                    gymOwner.getOwnerName(),
+                    gymOwner.getOwnerAddress(),
+                    gymOwner.getOwnerGSTNum(),
+                    gymOwner.isApproved());
         }
+
         System.out.println("--------------------------------------------------------------------");
         System.out.println();
     }
@@ -133,6 +131,7 @@ public class FlipFitAdminService {
         System.out.println("Enter the GymOwner id: ");
         Integer id = in.nextInt();
         gymOwnerDao.approve(id);
+        System.out.println("Gym Owner Approved Successfully with ID: "+id);
     }
 
     public void approveGymCentre() {
@@ -141,5 +140,6 @@ public class FlipFitAdminService {
         System.out.println("Enter the GymCentre id: ");
         Integer id = in.nextInt();
         gymCentreDao.approve(id);
+        System.out.println("Gym Centre Approved Sucessfully with ID:"+id);
     }
 }
