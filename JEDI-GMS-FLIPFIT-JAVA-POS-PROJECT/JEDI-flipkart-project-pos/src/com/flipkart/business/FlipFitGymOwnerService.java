@@ -87,9 +87,7 @@ public class FlipFitGymOwnerService {
     public void viewAllApprovedGymCenters() {
         System.out.println("Viewing All Gym Centers");
         List<GymCenter> ApprovedGymCentres=gymcenterDao.viewApprovedGymCentres();
-        for(GymCenter gymCenter:ApprovedGymCentres){
-            System.out.println(gymCenter);
-        }
+
     }
 
     public void createGymOwner(String email, String password) {
