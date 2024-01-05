@@ -23,4 +23,16 @@ public class FlipFitSlotDao {
         }
         return timeSlotOfAGym;
     }
+
+    public void addCustomer(int id,int slotId) {
+        for(TimeSlot timeSlot:timeSlotList){
+            if(timeSlot.getSlotId()==slotId){
+                timeSlot.getCustomerId().add(id);
+            }
+        }
+    }
+
+    public void cancelCustomer(int id,int slotId) {
+
+    }
 }

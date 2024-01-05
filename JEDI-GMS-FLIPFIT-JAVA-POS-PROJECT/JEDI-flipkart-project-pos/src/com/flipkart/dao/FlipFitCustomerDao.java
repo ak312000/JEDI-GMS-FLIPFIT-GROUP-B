@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 
 import java.util.ArrayList;
@@ -47,5 +48,36 @@ public class FlipFitCustomerDao {
         // Optionally, you may want to save the updated list to your data source (e.g., database).
     }
 
+
+    public int getIDFromEmail(String email, String password) {
+        for(Customer customer:customers){
+            if(customer.getCustomerEmailAddress().equals(email) && customer.getPassword().equals(password)){
+                return customer.getCustomerId();
+            }
+        }
+        return 0;
+    }
+
+    public void addBooking(Booking booking,int id) {
+        for(Customer customer:customers){
+            if(customer.getCustomerId()==id ){
+                customer.getBookings().add(booking);
+            }
+            else{
+                System.out.println("No customer Found with this CustId");
+            }
+        }
+
+    }
+
+    public List<Booking> getAllBooking(int id) {
+        for(Customer customer:customers){
+            if(customer.getCustomerId()==id ){
+                return customer.getBookings();
+            }
+
+        }
+        return null;
+    }
 
 }

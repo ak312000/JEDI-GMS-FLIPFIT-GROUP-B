@@ -1,5 +1,6 @@
 package com.flipkart.dao;
 
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCenter;
 import com.flipkart.bean.GymOwner;
 
@@ -48,7 +49,6 @@ public class FlipFitGymCentreDao {
                 gymsInLocation.add(gym);
             }
         }
-
         return gymsInLocation;
     }
 
@@ -69,4 +69,5 @@ public class FlipFitGymCentreDao {
         }
         return ApprovedGymCentres;
     }
+
 }

@@ -1,15 +1,20 @@
 package com.flipkart.business;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymCenter;
+import com.flipkart.dao.FlipFitBookingDao;
 import com.flipkart.dao.FlipFitCustomerDao;
 import com.flipkart.dao.FlipFitGymCentreDao;
+import com.flipkart.dao.FlipFitSlotDao;
 
 import java.util.*;
 
 public class FlipFitCustomerService {
     FlipFitCustomerDao customerDatabase = new FlipFitCustomerDao();
     FlipFitGymCentreDao flipFitGymCentreDao=new FlipFitGymCentreDao();
+    FlipFitBookingDao flipFitBookingDao = new FlipFitBookingDao();
+    FlipFitSlotDao flipFitSlotDao = new FlipFitSlotDao();
 
     public void createCustomer(String name, String address,String emailAddress, String phone, String password) {
         Customer customer = new Customer(name,address,emailAddress,phone,password);
@@ -132,8 +137,23 @@ public class FlipFitCustomerService {
         System.out.println("cancel Slot");
     }
 
-    public void viewAllBookings() {
-        System.out.println("viewAllBookings");
+    public void viewAllBookings(String email,String password) {
+        int id=customerDatabase.getIDFromEmail(email,password);
+        List<Booking> bookings= customerDatabase.getAllBooking(id);
+        if (bookings != null ) {
+            for (Booking booking: bookings){
+
+                    System.out.println("Booking ID: " + booking.getId());
+                    System.out.println("CustID: " + booking.getCustId());
+                    System.out.println("Centre Id: " + booking.getGymCentreId());
+                    System.out.println("Slot ID: " + booking.getSlotId());
+                    System.out.println("status: " + booking.isStatus());
+
+            }
+
+        } else {
+            System.out.println("Customer not found with ID: " + email);
+        }
     }
 
 
@@ -182,5 +202,34 @@ public class FlipFitCustomerService {
             }
         }
 
+    }
+
+    public void makeBooking(String email, String password) {
+        int id=customerDatabase.getIDFromEmail(email,password);
+        if(id==0) {
+            System.out.println("No customer with this email");
+        }
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter gymCentreId: ");
+        int gymCentreId = in.nextInt();
+        System.out.println("Enter Slot Id: ");
+        int  slotId= in.nextInt();
+        System.out.println("Enter date  ");
+        String  date= in.nextLine();
+
+        Booking booking = new Booking(id,gymCentreId,slotId,email,date);
+        customerDatabase.addBooking(booking,id);
+        flipFitSlotDao.addCustomer(id,slotId);
+
+    }
+
+    public void cancleBooking(int bookingId,String email,String password,int slotId) {
+        int id=customerDatabase.getIDFromEmail(email,password);
+        if(id==0) {
+            System.out.println("No customer with this email");
+        }
+        flipFitBookingDao.cancleBooking(bookingId);
+        flipFitSlotDao.cancelCustomer(id,slotId);
     }
 }
