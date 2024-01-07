@@ -2,6 +2,16 @@ package com.flipkart.bean;
 
 public class GymCenter {
     private static int gymCentreIdNum = 100;
+    private int gymOwnerId;
+
+    public int getGymOwnerId() {
+        return gymOwnerId;
+    }
+
+    public void setGymOwnerId(int gymOwnerId) {
+        this.gymOwnerId = gymOwnerId;
+    }
+
     private int gymCentreId;
     private String gymName;
     private String gymEmailAddress;

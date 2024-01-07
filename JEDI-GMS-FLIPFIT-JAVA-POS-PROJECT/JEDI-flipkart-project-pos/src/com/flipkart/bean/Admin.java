@@ -1,6 +1,8 @@
 package com.flipkart.bean;
 
 public class Admin {
+
+
     private static int startId=100;
     private int adminId;
     private String adminName;

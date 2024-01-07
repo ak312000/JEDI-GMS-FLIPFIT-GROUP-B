@@ -6,7 +6,7 @@ import com.flipkart.bean.Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlipFitCustomerDao {
+public class FlipFitCustomerDao implements CutomerDaoInterface{
     static List<Customer> customers = new ArrayList<>();
 
     public void add(Customer customer) {
