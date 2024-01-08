@@ -10,7 +10,7 @@ public class FlipFitSlotDao {
     static List<TimeSlot> timeSlotList=new ArrayList<>();
     public void add(TimeSlot timeSlot) {
         timeSlotList.add(timeSlot);
-        System.out.println("Slot  added Successfully ");
+        System.out.println("\u001B[32mSlot added Successfully\u001B[0m");
     }
 
     public List<TimeSlot> viewAllSlots(int gymId) {

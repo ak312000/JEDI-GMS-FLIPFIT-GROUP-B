@@ -150,7 +150,7 @@ public class FlipFitAdminService {
         System.out.println("Enter the GymOwner id: ");
         Integer id = in.nextInt();
         gymOwnerDao.approve(id);
-        System.out.println("Gym Owner Approved Successfully with ID: "+id);
+        System.out.println("\u001B[34mGym Owner Approved Successfully with ID: " + id + "\u001B[0m");
     }
 
     public void approveGymCentre() {
@@ -159,6 +159,6 @@ public class FlipFitAdminService {
         System.out.println("Enter the GymCentre id: ");
         Integer id = in.nextInt();
         gymCentreDao.approve(id);
-        System.out.println("Gym Centre Approved Sucessfully with ID:"+id);
+        System.out.println("Gym Centre Approved Sucessfully with ID:"+id+ "\u001B[0m");
     }
 }

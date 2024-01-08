@@ -47,26 +47,32 @@ public class FlipFitGymOwnerService {
 
     public void viewAllSlots() {
         System.out.println("View All Slots");
-        Scanner in=new Scanner(System.in);
-        System.out.println("Enter GymId whose slot need to check:");
-        int gymId=  in.nextInt();
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Enter GymId whose slot needs to be checked:");
+        int gymId = in.nextInt();
         in.nextLine();
-        List<TimeSlot> slots=slotDao.viewAllSlots(gymId);
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------");
-        beautifyPrint("SlotId", "GymId", "Day", "startTime", "EndTime");
-        System.out.println("--------------------------------------------------------------------");
 
-        for(TimeSlot slot: slots) {
+        List<TimeSlot> slots = slotDao.viewAllSlots(gymId);
 
-            System.out.printf("%-16s", slot.getSlotId());
-            System.out.printf("%-16s", slot.getGymId());
-            System.out.printf("%-16s", slot.getDay());
-            System.out.printf("%-18s", slot.getStartTime());
-            System.out.printf("%-18s", slot.getStartTime());
-            System.out.println("");
+        if (slots.isEmpty()) {
+            System.out.println("No slots available for the specified GymId.");
+        } else {
+            System.out.println("+----------------+--------------+------------------+--------------+--------------+");
+            beautifyPrint("SlotId", "GymId", "Day", "Start Time", "End Time");
+            System.out.println("+----------------+--------------+------------------+--------------+--------------+");
+
+            for (TimeSlot slot : slots) {
+                System.out.printf("| %-14s | %-12s | %-16s | %-12s | %-12s |%n",
+                        slot.getSlotId(),
+                        slot.getGymId(),
+                        slot.getDay(),
+                        slot.getStartTime(),
+                        slot.getEndTime());
+            }
+
+            System.out.println("+----------------+--------------+------------------+--------------+--------------+");
         }
-        System.out.println("--------------------------------------------------------------------");
     }
 
     public boolean isApprovedGymOwner(int id) {
@@ -102,10 +108,11 @@ public class FlipFitGymOwnerService {
         System.out.println("view All Gym Centers");
     }
 
-    public void viewAllApprovedGymCenters() {
-        System.out.println("Viewing All Gym Centers");
-        List<GymCenter> ApprovedGymCentres=gymcenterDao.viewApprovedGymCentres();
 
+    public void viewAllApprovedGymCenters() {
+        System.out.println("Viewing All Approved Gym Centers");
+
+        List<GymCenter> approvedGymCenters = gymcenterDao.viewApprovedGymCentres();
     }
 
     public void createGymOwner(String email, String password) {
@@ -164,7 +171,7 @@ public class FlipFitGymOwnerService {
 
 
         gymcenterDao.add(gym);
-        System.out.println("Gym Centre Registered Successfully!");
+        System.out.println("\u001B[32mGym Center Registered Successfully!\u001B[0m");
 
     }
 
@@ -189,7 +196,7 @@ public class FlipFitGymOwnerService {
 
                 System.out.print("Enter Number of Seats in a Slot: ");
                 gymCenter.setNumOfSeats(scanner.nextInt());
-                System.out.println("Details updated !");
+                System.out.println("\u001B[32mDetails updated!\u001B[0m");
                 flag=true;
             }
 
@@ -219,7 +226,7 @@ public class FlipFitGymOwnerService {
                 sl.setStartTime(scanner.nextLine());
                 System.out.print("Enter New End Time for this slot: ");
                 sl.setEndTime(scanner.nextLine());
-                System.out.println("slot updated!");
+                System.out.println("\u001B[32m Slots Updated Successfully!\u001B[0m");
                 flag = true;
             }
         }
@@ -247,7 +254,7 @@ public class FlipFitGymOwnerService {
                 gymowner.setOwnerGSTNum(scanner.nextInt());
                 System.out.print("Enter New Adress ");
                 gymowner.setOwnerAddress(scanner.nextLine());
-                System.out.println("Gym Owner Details updated!");
+                System.out.println("\u001B[32mGym Owner Details updated!\u001B[0m");
                 flag=true;
             }
         }

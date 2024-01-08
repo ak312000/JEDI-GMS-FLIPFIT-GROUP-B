@@ -67,20 +67,16 @@ public class FlipFitGymCentreDao {
         return approvedGymCentres;
     }
     private void displayGymCentres(List<GymCenter> gymCentres) {
-        System.out.println();
-        System.out.println("--------------------------------------------------------------------");
-        System.out.printf("%-7s %-20s %-15s %-12s %n", "ID", "Name", "Location", "Approved");
-        System.out.println("------------------------------------------------------------------");
+        System.out.println("+----------------+--------------+------------------+----------+");
+        System.out.printf("| %-13s | %-11s | %-16s | %-8s |%n", "Gym Id", "Name", "Address", "Approved");
+        System.out.println("+----------------+--------------+------------------+----------+");
 
-        for (GymCenter gymCenter : gymCentres) {
-            System.out.printf("%-7d %-20s %-15s %-12s %n",
-                    gymCenter.getId(),
-                    gymCenter.getGymName(),
-                    gymCenter.getGymLocation(),
-                    gymCenter.isApproved());
-        }
-
-        System.out.println("--------------------------------------------------------------------");
-    }
-
-}
+        for (GymCenter gym : gymCentres) {
+            if(gym.isApproved()) {
+                System.out.printf("| %-13s | %-11s | %-16s | %-8s |%n",
+                        gym.getId(),
+                        gym.getGymName(),
+                        gym.getGymLocation(),
+                        gym.isApproved() );
+            }
+}}}

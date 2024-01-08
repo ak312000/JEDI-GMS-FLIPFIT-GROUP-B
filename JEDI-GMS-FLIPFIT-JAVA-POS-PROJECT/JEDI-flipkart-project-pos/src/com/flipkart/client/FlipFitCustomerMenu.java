@@ -95,60 +95,62 @@ public class FlipFitCustomerMenu {
 
     public void customerMenu(String email, String password) {
 
+        while(true) {
+            Scanner in = new Scanner(System.in);
+            int option;
 
-        Scanner in = new Scanner(System.in);
-        int option;
-
-        System.out.println("\u001B[96mCustomer Menu:\u001B[0m");
-        System.out.println("\u001B[92m1. Search all Gyms\u001B[0m");
-        System.out.println("\u001B[92m2. Search Gyms by location\u001B[0m");
-        System.out.println("\u001B[92m3. View Booked Slots\u001B[0m");
-        System.out.println("\u001B[92m4. Cancel Booking\u001B[0m");
-        System.out.println("\u001B[92m5. Make Payment\u001B[0m");
-        System.out.println("\u001B[92m6. Edit Profile\u001B[0m");
-        System.out.println("\u001B[92m7. View Profile\u001B[0m");
-        System.out.println("\u001B[95m8. Exit\u001B[0m");
+            System.out.println("\u001B[96mCustomer Menu:\u001B[0m");
+            System.out.println("\u001B[92m1. Search all Gyms\u001B[0m");
+            System.out.println("\u001B[92m2. Search Gyms by location\u001B[0m");
+            System.out.println("\u001B[92m3. View Booked Slots\u001B[0m");
+            System.out.println("\u001B[92m4. Cancel Booking\u001B[0m");
+            System.out.println("\u001B[92m5. Make Payment\u001B[0m");
+            System.out.println("\u001B[92m6. Edit Profile\u001B[0m");
+            System.out.println("\u001B[92m7. View Profile\u001B[0m");
+            System.out.println("\u001B[95m8. Exit\u001B[0m");
 
 
-        option = in.nextInt();
+            option = in.nextInt();
 
-        switch (option){
-            case 1:
-                customerService.searchAllGyms();
-                break;
-            case 2:
-                System.out.print("Enter the Location where you want to search: ");
-                String location=in.next();
-                customerService.searchGymOnLocation(location);
-                break;
-            case 3:
-                customerService.makeBooking(email,password);
-                break;
-            case 4:
-                customerService.viewAllBookings(email,password);
-                break;
-            case 5:
-                System.out.println("Enter booking id to cancel");
-                int bookingId=in.nextInt();
-                System.out.println("Enter slotId id to cancel");
-                int slotId=in.nextInt();
-                customerService.cancleBooking(bookingId,email,password,slotId);
-                break;
-            case 6:
-                customerService.editCustomer();
-                break;
-            case 7:
-                customerService.viewCustomerProfile(email);
-            case 8:
-                FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
-                try {
-                    gymApplication.main(null);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-                break;
-            default:
-                customerMenu(email,password);
+            switch (option) {
+                case 1:
+                    customerService.searchAllGyms();
+                    break;
+                case 2:
+                    System.out.print("Enter the Location where you want to search: ");
+                    String location = in.next();
+                    customerService.searchGymOnLocation(location);
+                    break;
+                case 3:
+                    customerService.makeBooking(email, password);
+                    break;
+                case 4:
+                    customerService.viewAllBookings(email, password);
+                    break;
+                case 5:
+                    System.out.println("Enter booking id to cancel");
+                    int bookingId = in.nextInt();
+                    System.out.println("Enter slotId id to cancel");
+                    int slotId = in.nextInt();
+                    customerService.cancleBooking(bookingId, email, password, slotId);
+                    break;
+                case 6:
+                    customerService.editCustomer();
+                    break;
+                case 7:
+                    customerService.viewCustomerProfile(email);
+                    break;
+                case 8:
+                    FlipFitApplicationMenu gymApplication = new FlipFitApplicationMenu();
+                    try {
+                        gymApplication.main(null);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                    break;
+                default:
+                    customerMenu(email, password);
+            }
         }
     }
 }

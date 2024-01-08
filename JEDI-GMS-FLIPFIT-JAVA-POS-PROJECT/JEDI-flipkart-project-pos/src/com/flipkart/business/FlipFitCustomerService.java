@@ -19,7 +19,7 @@ public class FlipFitCustomerService {
     public void createCustomer(String name, String address,String emailAddress, String phone, String password) {
         Customer customer = new Customer(name,address,emailAddress,phone,password);
         customerDatabase.add(customer);
-        System.out.println("customer added Successfully");
+        System.out.println("\u001B[32mCustomer added successfully\u001B[0m");
     }
     public void editCustomer( )
     {
@@ -56,7 +56,8 @@ public class FlipFitCustomerService {
             // Save the changes to the DAO layer
             customerDatabase.updateCustomer(customer);
 
-            System.out.println("Customer details updated successfully.");
+            System.out.println(".");
+            System.out.println("\u001B[32mCustomer details updated successfully\u001B[0m");
         } else {
             System.out.println("Customer not found with ID: " + customerId);
         }
@@ -85,8 +86,8 @@ public class FlipFitCustomerService {
         System.out.println("Choose slot option: ");
         Scanner in = new Scanner(System.in);
         String option = in.next();
-        System.out.println("Slot booked successfully");
 
+        System.out.println("\u001B[32mSlot booked successfully!\u001B[0m");
         gymMap.get(gym).remove(option);
     }
 
@@ -107,20 +108,20 @@ public class FlipFitCustomerService {
         bookSlot(selectedGym);
     }
 
-    public void viewCustomerProfile(String email){
+    public void viewCustomerProfile(String email) {
         Customer customer = customerDatabase.getCustomerByemail(email);
 
         if (customer != null) {
-            // Display customer details
-            System.out.println("Customer ID: " + customer.getCustomerId());
-            System.out.println("Name: " + customer.getCustomerName());
-            System.out.println("Address: " + customer.getCustomerAddress());
-            System.out.println("Email: " + customer.getCustomerEmailAddress());
-            System.out.println("Phone: " + customer.getCustomerPhone());
-
-            // Additional attributes can be added based on your Customer class
+            System.out.println("CUSTOMER PROFILE");
+            System.out.println("+------------------------+----------------------+");
+            System.out.printf("| %-21s | %-20s |%n", "Customer ID", customer.getCustomerId());
+            System.out.printf("| %-21s | %-20s |%n", "Name", customer.getCustomerName());
+            System.out.printf("| %-21s | %-20s |%n", "Address", customer.getCustomerAddress());
+            System.out.printf("| %-21s | %-20s |%n", "Email", customer.getCustomerEmailAddress());
+            System.out.printf("| %-21s | %-20s |%n", "Phone", customer.getCustomerPhone());
+            System.out.println("+------------------------+----------------------+");
         } else {
-            System.out.println("Customer not found with ID: " + email);
+            System.out.println("Customer not found with email: " + email);
         }
     }
 
@@ -137,25 +138,28 @@ public class FlipFitCustomerService {
         System.out.println("cancel Slot");
     }
 
-    public void viewAllBookings(String email,String password) {
-        int id=customerDatabase.getIDFromEmail(email,password);
-        List<Booking> bookings= customerDatabase.getAllBooking(id);
-        if (bookings != null ) {
-            for (Booking booking: bookings){
+    public void viewAllBookings(String email, String password) {
+        int id = customerDatabase.getIDFromEmail(email, password);
+        List<Booking> bookings = customerDatabase.getAllBooking(id);
 
-                    System.out.println("Booking ID: " + booking.getId());
-                    System.out.println("CustID: " + booking.getCustId());
-                    System.out.println("Centre Id: " + booking.getGymCentreId());
-                    System.out.println("Slot ID: " + booking.getSlotId());
-                    System.out.println("status: " + booking.isStatus());
+        if (bookings != null && !bookings.isEmpty()) {
+            System.out.println("+-------------+-----------+-----------+--------+---------+");
+            System.out.printf("| %-11s | %-9s | %-9s | %-6s | %-7s |%n", "Booking ID", "CustID", "Centre Id", "Slot ID", "Status");
+            System.out.println("+-------------+-----------+-----------+--------+---------+");
 
+            for (Booking booking : bookings) {
+                System.out.printf("| %-11s | %-9s | %-9s | %-6s | %-7s |%n",
+                        booking.getId(),
+                        booking.getCustId(),
+                        booking.getGymCentreId(),
+                        booking.getSlotId(),
+                        booking.isStatus());
+                System.out.println("+-------------+-----------+-----------+--------+---------+");
             }
-
         } else {
-            System.out.println("Customer not found with ID: " + email);
+            System.out.println("No bookings found for the customer with ID: " + email);
         }
     }
-
 
     public boolean isValidCustomerCredentials( String customerEmail, String customerPassword) {
         List<Customer> allCustomers = customerDatabase.getAllCustomers();
@@ -168,42 +172,37 @@ public class FlipFitCustomerService {
     }
 
     public void searchAllGyms() {
-
-        List<GymCenter> allGyms =flipFitGymCentreDao.getGymCenters();
+        List<GymCenter> allGyms = flipFitGymCentreDao.getGymCenters();
 
         if (allGyms.isEmpty()) {
             System.out.println("No gyms available.");
         } else {
-            System.out.println("List of all gyms:");
+            System.out.println("+----------------+----------------------+-----------------------+");
+            System.out.printf("| %-13s | %-20s | %-21s |%n", "Gym ID", "Gym Name", "Gym Address");
+            System.out.println("+----------------+----------------------+-----------------------+");
+
             for (GymCenter gym : allGyms) {
-                System.out.println("Gym ID: " + gym.getId());
-                System.out.println("Gym Name: " + gym.getGymName());
-                System.out.println("Gym Address: " + gym.getGymLocation());
-                // Add more attributes as needed
-                System.out.println();
+                System.out.printf("| %-13s | %-20s | %-21s |%n", gym.getId(), gym.getGymName(), gym.getGymLocation());
+                System.out.println("+----------------+----------------------+-----------------------+");
             }
         }
-
     }
     public void searchGymOnLocation(String location) {
-
         List<GymCenter> gymsByLocation = flipFitGymCentreDao.searchGymsByLocation(location);
 
         if (gymsByLocation.isEmpty()) {
             System.out.println("No gyms found in the specified location: " + location);
         } else {
-            System.out.println("List of gyms in location " + location + ":");
+            System.out.println("+----------------+----------------------+-----------------------+");
+            System.out.printf("| %-13s | %-20s | %-21s |%n", "Gym ID", "Gym Name", "Gym Address");
+            System.out.println("+----------------+----------------------+-----------------------+");
+
             for (GymCenter gym : gymsByLocation) {
-                System.out.println("Gym ID: " + gym.getId());
-                System.out.println("Gym Name: " + gym.getGymName());
-                System.out.println("Gym Address: " + gym.getGymLocation());
-                // Add more attributes as needed
-                System.out.println();
+                System.out.printf("| %-13s | %-20s | %-21s |%n", gym.getId(), gym.getGymName(), gym.getGymLocation());
+                System.out.println("+----------------+----------------------+-----------------------+");
             }
         }
-
     }
-
     public void makeBooking(String email, String password) {
         int id=customerDatabase.getIDFromEmail(email,password);
         if(id==0) {
